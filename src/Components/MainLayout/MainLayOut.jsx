@@ -6,7 +6,8 @@ import Footer from "../../Pages/Shared/Footer";
 const MainLayOut = () => {
   return (
     <>
-      <div>
+      <div className="overflow-hidden">
+       
         <NavBar></NavBar>
 
         <Outlet></Outlet>

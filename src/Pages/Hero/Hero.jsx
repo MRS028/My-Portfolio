@@ -2,13 +2,20 @@ import React from "react";
 import { Typewriter } from "react-simple-typewriter";
 import profileImg from "../../assets/mypic.jpg";
 import { FaDiagramProject, FaDownload } from "react-icons/fa6";
-import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
-import { Element } from "react-scroll";
+import myCv from '../../assets/CV/myCv.pdf'
+import {
+  FaFacebook,
+  FaTwitter,
+  FaLinkedin,
+  FaGithub,
+  FaInstagram,
+} from "react-icons/fa";
+import { Element, Link } from "react-scroll";
 
 const Hero = () => {
   return (
-    <section className="pt-20 lg:pt-52 px-6 lg:px-24 mb-5 lg:mb-10">
-        <Element name="home"></Element>
+    <section className="pt-20 lg:pt-44 px-6 lg:px-24 mb-5 lg:mb-10 overflow-hidden">
+      <Element name="home"></Element>
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
         {/* Text Content */}
         <div className="lg:w-1/2 text-center pt-5 lg:text-left lg:mb-0">
@@ -79,16 +86,22 @@ const Hero = () => {
             </a>
           </div>
           <div className="mt-6 flex justify-center lg:justify-start gap-3 lg:gap-5">
-            <button
+            <a
+              href={myCv} 
+              download="My_Resume.pdf"
               className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300"
             >
-              <FaDownload className="mr-2" /> Download My CV
+              <FaDownload /> Download My CV
+            </a>
+            <Link to="project" smooth={true} duration={500}>
+            <button className="btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-lg transition duration-300">
+              <FaDiagramProject />
+              View My Project
             </button>
-            <button
-              className="btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-lg transition duration-300"
-            >
-              <FaDiagramProject className="mr-2" />View My Project
-            </button>
+            
+            
+            </Link>
+            
           </div>
         </div>
 

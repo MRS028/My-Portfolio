@@ -22,7 +22,7 @@ const skills = [
 const Skills = () => {
   return (
     <section className=" bg-gray-900  py-16">
-      <h2 className="text-center text-5xl text-white font-bold mb-8">Skills</h2>
+      <h2 className="text-center text-5xl text-green-500 font-bold mb-8">Skills</h2>
       <div className="w-[70%] mx-auto gap-5 mb-12">
         <Marquee gradient={false} speed={70} className="flex items-center">
           {skills.map((skill, index) => (

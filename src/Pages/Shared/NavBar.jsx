@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "../../assets/logopng.png";
 import { FaHome, FaUser, FaBriefcase, FaEnvelope } from "react-icons/fa";
-import { Link } from "react-scroll"; // Importing 'Link' from 'react-scroll'
+import { Link } from "react-scroll";
 import { HiMenu, HiX } from "react-icons/hi";
 
 const NavBar = () => {
@@ -34,7 +34,7 @@ const NavBar = () => {
   </li>
   <li>
     <Link
-      to="projects" smooth={true} duration={500}
+      to="project" smooth={true} duration={500}
       className={({ isActive }) =>
         isActive
           ? "text-green-400 font-semibold border-b-2 border-green-400 transition-all duration-300"
@@ -61,13 +61,13 @@ const NavBar = () => {
 
 
   return (
-    <div className="bg-gray-900 fixed top-0 z-10 text-white w-full border-b border-green-500 p-2 rounded-xl">
+    <div className="bg-gray-900 fixed top-0 z-10 text-white w-full border-b border-green-500 rounded-xl overflow-hidden">
       <div className="navbar lg:w-11/12 mx-auto">
         {/* Logo Section */}
         <div className="navbar-start flex items-center">
           <a className="btn btn-ghost normal-case text-xl flex items-center">
             <img src={logo} alt="Logo" className="w-10 h-10 mr-3 rounded-full" />
-            <span className="font-extrabold tracking-wide">RiFAT</span>
+            <span className="font-extrabold tracking-wide">R<span className="text-green-500">i</span>F<span className="text-green-500">A</span>T</span>
           </a>
         </div>
 
