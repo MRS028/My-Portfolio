@@ -55,7 +55,7 @@ function Contact() {
 
   return (
     <div className="container mx-auto p-8">
-      <Element name="contact"></Element>
+     
       <h2 className="text-4xl font-bold text-green-500 text-center mb-8">Contact Me</h2>
 
       <div className="flex flex-col-reverse lg:flex-row">
@@ -67,21 +67,21 @@ function Contact() {
           {/* Contact Icons */}
           <div className="flex space-x-6 mb-6">
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/MRS028"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithub size={40} className="hover:text-gray-700" />
+              <FaGithub size={40} className="hover:text-green-700" />
             </a>
             <a
-              href="https://www.linkedin.com/in/yourusername"
+              href="https://www.linkedin.com/in/md-rifat-sheikh-426ab0294"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaLinkedin size={40} className="hover:text-gray-700" />
+              <FaLinkedin size={40} className="hover:text-green-700" />
             </a>
             <a href="mailto:skrifat483@gmail.com?subject=Contact from Portfolio&body=Hello, I have a query...">
-              <FaEnvelope size={40} className="hover:text-gray-700" />
+              <FaEnvelope size={40} className="hover:text-green-700" />
             </a>
           </div>
 
@@ -93,7 +93,7 @@ function Contact() {
                 type="text"
                 name="name"
                 placeholder="Your Name"
-                className="p-3 border border-gray-300 rounded-md"
+                className="p-3 border border-gray-300 focus:outline-none focus:ring-1 rounded-md focus:ring-green-500"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
@@ -102,7 +102,7 @@ function Contact() {
                 type="email"
                 name="email"
                 placeholder="Your Email"
-                className="p-3 border border-gray-300 rounded-md"
+                className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
@@ -110,7 +110,7 @@ function Contact() {
               <textarea
                 name="message"
                 placeholder="Your Message"
-                className="p-3 border border-gray-300 rounded-md"
+                className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500"
                 rows="5"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -119,9 +119,9 @@ function Contact() {
             </div>
             <button
               type="submit"
-              className="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600"
+              className="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-700"
             >
-              Send Message
+              Send Message  🚀
             </button>
           </form>
         </div>
@@ -131,7 +131,7 @@ function Contact() {
             autoplay
             loop
             src={lottie2} 
-            style={{ height: "400px", width: "400px" }}
+            style={{ height: "400px", width: "380px" }}
           />
         </div>
       </div>

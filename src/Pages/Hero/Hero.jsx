@@ -15,7 +15,7 @@ import { Element, Link } from "react-scroll";
 const Hero = () => {
   return (
     <section className="pt-20 lg:pt-44 px-6 lg:px-24 mb-5 lg:mb-10 overflow-hidden">
-      <Element name="home"></Element>
+      
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
         {/* Text Content */}
         <div className="lg:w-1/2 text-center pt-5 lg:text-left lg:mb-0">
@@ -86,17 +86,23 @@ const Hero = () => {
             </a>
           </div>
           <div className="mt-6 flex justify-center lg:justify-start gap-3 lg:gap-5">
-            <a
-              href={myCv} 
-              download="My_Resume.pdf"
-              className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300"
+            <button
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = myCv; // URL of your CV file
+                link.download = "My_Resume.pdf"; // File name for download
+                link.click();
+              }}
+              className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300"
             >
-              <FaDownload /> Download My CV
-            </a>
+             
+              <FaDownload  size={12}/> Download My CV
+            </button>
             <Link to="project" smooth={true} duration={500}>
-            <button className="btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-lg transition duration-300">
-              <FaDiagramProject />
-              View My Project
+            <button className="btn  bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-2 rounded-lg transition duration-300">
+            {/* Need to fix this issues */}
+              <FaDiagramProject size={12} />
+             View My Projects
             </button>
             
             
@@ -114,6 +120,7 @@ const Hero = () => {
           />
         </div>
       </div>
+      <Element name="about"></Element>
     </section>
   );
 };

@@ -84,7 +84,7 @@ const ProjectShowcase = () => {
 
   return (
     <div className="container mx-auto py-12 px-6">
-      <Element name="project"></Element>
+      
       <h2 className="text-4xl font-semibold text-center text-green-500 mb-8">
         My Projects
       </h2>
@@ -108,7 +108,7 @@ const ProjectShowcase = () => {
             </p>
             <button
               onClick={() => handleViewMore(project)}
-              className="mt-4 text-green-500 hover:underline"
+              className="mt-4 text-green-500 hover:underline font-bold"
             >
               View More
             </button>
@@ -119,7 +119,7 @@ const ProjectShowcase = () => {
       {/* Modal for project details */}
       {selectedProject && (
   <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white p-8 rounded-lg shadow-xl w-11/12 sm:w-10/12 lg:w-8/12 lg:h-[32rem] overflow-auto relative">
+    <div className="bg-white p-8 rounded-lg shadow-xl w-11/12 sm:w-10/12 lg:w-8/12 lg:h-[38rem] overflow-auto relative">
     <h3 className="text-2xl text-green-600 font-bold text-center">
         {selectedProject.title}
       </h3>
@@ -157,7 +157,7 @@ const ProjectShowcase = () => {
           rel="noopener noreferrer"
           className="text-green-500 hover:underline"
         >
-          Live Link
+         🔗   Live Link
         </a>
         <br />
         <a
@@ -166,7 +166,7 @@ const ProjectShowcase = () => {
           rel="noopener noreferrer"
           className="text-green-500 hover:underline"
         >
-          GitHub Link
+          🔗  GitHub Link
         </a>
       </div>
 

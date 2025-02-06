@@ -2,6 +2,7 @@ import React from "react";
 import { FaUniversity, FaGraduationCap, FaSchool } from "react-icons/fa";
 import animationData from "../../assets/Lotties/lottie1.json"; 
 import Lottie from "react-lottie";
+import { Element } from "react-scroll";
 
 const Education = () => {
     const defaultOptions = {
@@ -67,7 +68,9 @@ const Education = () => {
             </div>
           </div>
         </div>
+        <Element name="contact"></Element>
       </div>
+      
    
     </section>
   );
