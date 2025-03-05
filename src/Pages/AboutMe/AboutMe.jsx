@@ -2,6 +2,7 @@ import React from "react";
 import { FaReact, FaNodeJs, FaDatabase } from "react-icons/fa";
 import { SiMongodb, SiExpress, SiJavascript } from "react-icons/si";
 import { Element } from "react-scroll";
+import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 
 
 const AboutMe = () => {
@@ -12,7 +13,8 @@ const AboutMe = () => {
         
         <div className="container  mx-auto px-6">
           <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-green-500">About Me </h2>
+            <SectionTitle title={"About Me"}/>
+          {/* <h2 className="text-4xl font-bold text-green-500">About Me </h2> */}
               
             
             <p className="text-lg mt-4 text-gray-400">

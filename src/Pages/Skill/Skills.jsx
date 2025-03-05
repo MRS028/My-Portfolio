@@ -3,6 +3,7 @@ import Marquee from "react-fast-marquee";
 import { FaHtml5, FaCss3Alt, FaReact, FaJs, FaNodeJs } from "react-icons/fa";
 import { SiTailwindcss, SiDaisyui, SiFirebase, SiExpress, SiJsonwebtokens, SiJenkins } from "react-icons/si";
 import Technologies from "./Technologies";
+import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 
 const skills = [
   { name: "HTML", icon: <FaHtml5 size={40} className="text-orange-600" /> },
@@ -22,7 +23,8 @@ const skills = [
 const Skills = () => {
   return (
     <section className=" bg-gray-900  py-16">
-      <h2 className="text-center text-5xl text-green-500 font-bold mb-8">Skills</h2>
+      <SectionTitle title={"Skills"}/>
+      {/* <h2 className="text-center text-5xl text-green-500 font-bold mb-8">Skills</h2> */}
       <div className="w-[70%] mx-auto gap-5 mb-12">
         <Marquee gradient={false} speed={70} className="flex items-center">
           {skills.map((skill, index) => (

@@ -2,6 +2,7 @@ import React from "react";
 import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs } from "react-icons/fa";
 import { SiTailwindcss, SiDaisyui, SiFirebase, SiExpress, SiJsonwebtokens, SiJenkins } from "react-icons/si";
 import { Element } from "react-scroll";
+import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 
 const technologies = [
   {
@@ -70,7 +71,8 @@ const Technologies = () => {
   return (
     <section className="py-12 bg-gray-800">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
-        <h2 className="text-4xl font-bold text-center mb-12 text-green-500">Skill Details</h2>
+        <SectionTitle title={"Skill Details"}/>
+        {/* <h2 className="text-4xl font-bold text-center mb-12 text-green-500">Skill Details</h2> */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {technologies.map((tech, index) => (
             <div

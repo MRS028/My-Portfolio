@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { BiCross } from "react-icons/bi";
-import { Element } from "react-scroll";
+import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 
 const ProjectShowcase = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const projects = [
+    {
+      title: "Medical Camp Management System (MCMS)",
+      image: "https://i.ibb.co.com/ZR9JcM0p/Screenshot-2025-02-16-153538.png",
+      link: "https://medical-camp-management-b10a12.web.app",
+      github: "https://github.com/MRS028/Medical-Camp-Management-System-Client-Side",
+      description:
+        "The Medical Camp Management System (MCMS) is a responsive MERN stack application designed to simplify the management of medical camps. It allows organizers to efficiently coordinate camps and participants to easily register, manage profiles, and access camp details. ",
+      techStack: ["React", "Firebase", "CSS", "MongoDB", "Node", "Express","JWT"],
+      detailedDescription:
+        "MCMS offers a seamless way to manage medical camps, ensuring smooth registration, participant tracking, and efficient camp coordination. The platform provides analytics, user management, and an intuitive UI for both organizers and participants. Built with React for the frontend and MongoDB, Node.js, and Express.js for the backend, MCMS ensures a secure and scalable experience. Future improvements include real-time chat integration for better communication between organizers and participants.",
+    },
     {
       title: "Game Review Platform",
       image: "https://i.ibb.co.com/RzMzWLN/Screenshot-2025-01-05-014948.png",
@@ -24,7 +34,7 @@ const ProjectShowcase = () => {
       github: "https://github.com/MRS028/Car-Rental-System-Client",
       description:
         "A feature-rich, user-centric car rental platform allowing users to book cars, manage profiles, and check availability.Ensuring real-time car availability updates to avoid overbooking. And this page is...",
-      techStack: ["React", "Node.js", "Express", "MongoDB", "Firebase"],
+      techStack: ["React", "Node.js", "Express", "MongoDB", "Firebase","JWT"],
       detailedDescription:
         "The major challenge was implementing dynamic pricing and availability based on different locations. I used Node.js and MongoDB for the backend and had to ensure scalability. Future improvements include adding a review system and location-based filtering.",
     },
@@ -84,16 +94,17 @@ const ProjectShowcase = () => {
 
   return (
     <div className="container mx-auto py-12 px-6">
+      <SectionTitle title={"My Projects"}/>
       
-      <h2 className="text-4xl font-semibold text-center text-green-500 mb-8">
-        My Projects
-      </h2>
+      {/* <h2 className="text-4xl font-semibold text-center text-green-500 mb-8">
+        
+      </h2> */}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="relative group border rounded-lg p-6 shadow-xl transition-all transform hover:scale-105 hover:shadow-2xl hover:border-green-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+            className="relative card-body group border rounded-lg p-6 shadow-xl transition-all transform hover:scale-105 hover:shadow-2xl hover:border-green-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
           >
             <img
               src={project.image}
@@ -108,7 +119,7 @@ const ProjectShowcase = () => {
             </p>
             <button
               onClick={() => handleViewMore(project)}
-              className="mt-4 text-green-500 hover:underline font-bold"
+              className="mt-4 text-right text-green-500 hover:underline font-bold"
             >
               View More
             </button>

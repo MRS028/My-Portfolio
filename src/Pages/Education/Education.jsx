@@ -3,6 +3,7 @@ import { FaUniversity, FaGraduationCap, FaSchool } from "react-icons/fa";
 import animationData from "../../assets/Lotties/lottie1.json"; 
 import Lottie from "react-lottie";
 import { Element } from "react-scroll";
+import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 
 const Education = () => {
     const defaultOptions = {
@@ -18,8 +19,10 @@ const Education = () => {
       <div className="container mx-auto px-6">
         <div className="">
         {/* <Lottie options={defaultOptions} height={120} width={130} /> */}
+
+        <SectionTitle title={"My Educational Background "} />
         <h2 className="lg:text-5xl text-4xl  font-extrabold text-center text-green-500 mb-12">
-          My Educational Background 
+          
         </h2>
         
 
