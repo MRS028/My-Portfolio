@@ -89,8 +89,13 @@ const Hero = () => {
             <button
               onClick={() => {
                 const link = document.createElement("a");
+<<<<<<< HEAD
                 link.href = myCv; // URL of your CV file
                 link.download = "Md_Rifat_Sheikh's_Resume.pdf"; // File name for download
+=======
+                link.href = myCv; 
+                link.download = "Md_Rifat_Sheikh's_Resume.pdf"; 
+>>>>>>> 68b73f20790a9ced8f5a95f8965e62728dc4b6ce
                 link.click();
               }}
               className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300"
