@@ -90,7 +90,7 @@ const Hero = () => {
               onClick={() => {
                 const link = document.createElement("a");
                 link.href = myCv; // URL of your CV file
-                link.download = "My_Resume.pdf"; // File name for download
+                link.download = "Md_Rifat_Sheikh's_Resume.pdf"; // File name for download
                 link.click();
               }}
               className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300"
