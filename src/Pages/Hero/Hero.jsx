@@ -1,6 +1,6 @@
 import React from "react";
 import { Typewriter } from "react-simple-typewriter";
-import profileImg from "../../assets/mypic.jpg";
+// import profileImg from "../";
 import { FaDiagramProject, FaDownload } from "react-icons/fa6";
 import myCv from '../../assets/CV/myCv.pdf'
 import {
@@ -112,11 +112,11 @@ const Hero = () => {
         </div>
 
         {/* Profile Image */}
-        <div className="lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
+        <div className="lg:w-1/2  flex justify-center lg:justify-end mt-8 lg:mt-0">
           <img
-            src={profileImg}
-            alt="Profile"
-            className="rounded-full shadow-lg w-64 h-64 lg:w-80 lg:h-80 object-cover"
+            src="/meDp.JPG"
+            alt="Profile Picture"
+            className="rounded-full shadow-lg w-64 h-64 lg:w-80 lg:mx-20 lg:h-80 object-cover"
           />
         </div>
       </div>

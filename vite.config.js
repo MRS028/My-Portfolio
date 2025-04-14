@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'build',
-    chunkSizeWarningLimit: 1500 // ওয়ার্নিংটা যাতে না আসে
+    chunkSizeWarningLimit: 1500 
   }
 })
