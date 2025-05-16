@@ -3,12 +3,13 @@ import { Link } from 'react-scroll';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiChevronRight } from 'react-icons/fi';
 import { BsSun, BsMoon } from 'react-icons/bs';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState('home');
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,11 +18,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
-  };
 
   const navItems = [
     { name: 'Home', to: 'home' },
@@ -133,7 +129,11 @@ const Navbar = () => {
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 onClick={toggleTheme}
-                className="ml-4 p-2.5 rounded-full bg-gradient-to-r from-gray-100 to-blue-50 dark:from-gray-800 dark:to-blue-900/40 text-gray-700 dark:text-gray-300 hover:shadow-lg hover:shadow-blue-500/20 dark:hover:shadow-blue-900/20 transition-all duration-300 transform"
+                className={`ml-4 p-2.5 rounded-full transition-all duration-300 transform
+                  ${isDark 
+                    ? 'bg-gradient-to-r from-gray-800 to-blue-900/40 hover:shadow-lg hover:shadow-blue-500/10' 
+                    : 'bg-gradient-to-r from-white to-blue-50 hover:shadow-lg hover:shadow-blue-500/20'
+                  }`}
                 aria-label="Toggle theme"
               >
                 <AnimatePresence mode="wait">
@@ -145,7 +145,7 @@ const Navbar = () => {
                     transition={{ duration: 0.2 }}
                   >
                     {isDark ? 
-                      <BsSun className="w-5 h-5 text-amber-500" /> : 
+                      <BsSun className="w-5 h-5 text-amber-400" /> : 
                       <BsMoon className="w-5 h-5 text-blue-600" />
                     }
                   </motion.div>
@@ -161,7 +161,11 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
               onClick={toggleTheme}
-              className="p-2.5 rounded-full bg-gradient-to-r from-gray-100 to-blue-50 dark:from-gray-800 dark:to-blue-900/40 text-gray-700 dark:text-gray-300 hover:shadow-lg hover:shadow-blue-500/20 dark:hover:shadow-blue-900/20 transition-all duration-300"
+              className={`p-2.5 rounded-full transition-all duration-300
+                ${isDark 
+                  ? 'bg-gradient-to-r from-gray-800 to-blue-900/40 hover:shadow-lg hover:shadow-blue-500/10' 
+                  : 'bg-gradient-to-r from-white to-blue-50 hover:shadow-lg hover:shadow-blue-500/20'
+                }`}
               aria-label="Toggle theme"
             >
               <AnimatePresence mode="wait">
@@ -173,7 +177,7 @@ const Navbar = () => {
                   transition={{ duration: 0.2 }}
                 >
                   {isDark ? 
-                    <BsSun className="w-5 h-5 text-amber-500" /> : 
+                    <BsSun className="w-5 h-5 text-amber-400" /> : 
                     <BsMoon className="w-5 h-5 text-blue-600" />
                   }
                 </motion.div>
@@ -184,7 +188,11 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2.5 rounded-full bg-gradient-to-r from-gray-100 to-blue-50 dark:from-gray-800 dark:to-blue-900/40 text-gray-700 dark:text-gray-300 hover:shadow-lg hover:shadow-blue-500/20 dark:hover:shadow-blue-900/20 transition-all duration-300"
+              className={`p-2.5 rounded-full transition-all duration-300
+                ${isDark 
+                  ? 'bg-gradient-to-r from-gray-800 to-blue-900/40 hover:shadow-lg hover:shadow-blue-500/10' 
+                  : 'bg-gradient-to-r from-white to-blue-50 hover:shadow-lg hover:shadow-blue-500/20'
+                }`}
               aria-label="Toggle menu"
             >
               <AnimatePresence mode="wait">
@@ -196,7 +204,7 @@ const Navbar = () => {
                   transition={{ duration: 0.2 }}
                 >
                   {isOpen ? 
-                    <FiX className="w-5 h-5 text-red-500 dark:text-red-400" /> : 
+                    <FiX className="w-5 h-5 text-red-400" /> : 
                     <FiMenu className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                   }
                 </motion.div>
@@ -214,7 +222,11 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden bg-gradient-to-b from-white/95 to-blue-50/95 dark:from-gray-900/95 dark:to-blue-900/[0.96] backdrop-blur-md border-t border-blue-100/20 dark:border-blue-900/20"
+            className={`md:hidden backdrop-blur-md border-t transition-all duration-300
+              ${isDark
+                ? 'bg-gradient-to-b from-gray-900/95 to-blue-900/[0.96] border-blue-900/20'
+                : 'bg-gradient-to-b from-white/95 to-blue-50/95 border-blue-100/20'
+              }`}
           >
             <motion.div 
               className="px-4 py-3 space-y-1"

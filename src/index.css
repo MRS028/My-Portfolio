@@ -2,13 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light theme colors */
+  --primary-light: #3B82F6;
+  --secondary-light: #6366F1;
+  --accent-light: #EC4899;
+  --background-light: #FFFFFF;
+  --text-primary-light: #1F2937;
+  --text-secondary-light: #4B5563;
+}
+
+.dark {
+  /* Dark theme colors */
+  --primary-dark: #60A5FA;
+  --secondary-dark: #818CF8;
+  --accent-dark: #F472B6;
+  --background-dark: #111827;
+  --text-primary-dark: #F9FAFB;
+  --text-secondary-dark: #D1D5DB;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply antialiased text-gray-900 dark:text-white;
+    @apply antialiased;
+    @apply transition-colors duration-300;
+  }
+
+  /* Theme transition for all elements */
+  *, *::before, *::after {
+    @apply transition-colors duration-300;
   }
 
   /* Custom scrollbar */
@@ -27,6 +53,11 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-400 dark:bg-gray-500;
   }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-blue-500/20 dark:bg-blue-400/20;
+  }
 }
 
 @layer components {
@@ -39,7 +70,24 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500;
+  }
+
+  /* Theme-aware button styles */
+  .btn-primary {
+    @apply px-6 py-2.5 rounded-lg font-medium
+    bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-600 hover:to-blue-600
+    dark:from-blue-500 dark:to-purple-500 dark:hover:from-purple-500 dark:hover:to-blue-500
+    text-white shadow-lg shadow-blue-500/20 dark:shadow-blue-500/10
+    transition-all duration-300 transform hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-2.5 rounded-lg font-medium
+    border-2 border-blue-600 dark:border-blue-500
+    text-blue-600 dark:text-blue-400
+    hover:bg-blue-50 dark:hover:bg-blue-900/30
+    transition-all duration-300 transform hover:scale-105;
   }
 }
 
@@ -70,6 +118,27 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Theme transition overlay */
+.theme-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  background: radial-gradient(circle at center, 
+    rgba(59, 130, 246, 0.2), 
+    transparent 70%
+  );
+  transition: opacity 0.3s ease;
+}
+
+.theme-transition-overlay.active {
+  opacity: 1;
 }
 
 * {
