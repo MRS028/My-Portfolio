@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import AnimatedBackground from "../../components/AnimatedBackground/AnimatedBackground";
+import { Element } from "react-scroll";
 
 // --- Replicated SectionTitle for self-containment ---
 const SectionTitle = ({ title, subtitle }) => (
@@ -114,13 +116,8 @@ const CodeSnippet = () => {
 const AboutMe = () => {
     return (
         <section className="relative py-20 overflow-hidden bg-gray-900 text-white">
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-                <div className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2">
-                    <div className="absolute w-full h-full bg-gradient-to-br from-purple-500/20 via-blue-500/0 to-green-500/20 blur-3xl animate-pulse-slow"></div>
-                </div>
-            </div>
-
+            <Element name="about"></Element>
+            <AnimatedBackground />
             <div className="relative z-10 container mx-auto px-6">
                 <SectionTitle title="About Me" subtitle="A passionate developer on a mission to build great things." />
 

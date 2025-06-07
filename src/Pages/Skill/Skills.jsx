@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedBackground from "../../components/AnimatedBackground/AnimatedBackground";
 
 // --- Inline SVG Icons (Replaces react-icons for compatibility) ---
 const Html5Icon = (props) => <svg {...props} viewBox="0 0 24 24" fill="currentColor"><path d="M1.999 0l1.822 20.423 8.179 3.577 8.179-3.577 1.821-20.423h-20zm16.141 6h-10.223l.192 2.155h9.839l-.473 5.309-3.475 1.228-3.474-1.228-.24-2.686h-2.16l.416 4.654 5.464 1.912 5.465-1.912.729-8.156h-11.859l-.192-2.155h12.243l-.307 3.464z"></path></svg>;
@@ -43,31 +44,24 @@ const Skills = () => {
     const skillsForMarquee = [...marqueeSkills, ...marqueeSkills];
 
     return (
-        <section className="relative py-20 overflow-hidden bg-gray-900">
-            {/* Animated Gradient Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-                <div className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2">
-                    <div className="absolute w-full h-full bg-gradient-to-br from-green-500/20 via-blue-500/0 to-purple-500/20 blur-3xl animate-pulse-slow"></div>
-                </div>
-            </div>
-
+        <section className="relative py-5 overflow-hidden bg-gray-900">
+            <AnimatedBackground />
             <div className="relative z-10 px-4">
                 {/* Part 1: Marquee */}
                 <SectionTitle title="Core Technologies" subtitle="My toolkit for building modern web applications." />
-                <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-                    <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll">
+                <div className="w-full overflow-hidden">
+                    <div className="flex animate-marquee">
                         {skillsForMarquee.map((skill, index) => (
-                            <li key={index}>
+                            <div key={index} className="flex-shrink-0 mx-8">
                                 <div className="group relative flex flex-col items-center justify-center w-36 h-36 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
                                     <div className="relative z-10 flex flex-col items-center">
                                         {skill.icon}
                                         <span className="mt-3 text-white font-medium text-sm">{skill.name}</span>
                                     </div>
                                 </div>
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 </div>
 
                 {/* Part 2: Detailed Grid */}
@@ -88,7 +82,7 @@ const Skills = () => {
                 </div>
             </div>
             {/* Element for react-scroll navigation */}
-            <div id="project"></div>
+            
         </section>
     );
 };

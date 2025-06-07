@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AnimatedBackground from '../../components/AnimatedBackground/AnimatedBackground';
 
 // --- Inline SVG Icons (Replaces react-icons for compatibility) ---
 const UniversityIcon = (props) => (
@@ -83,30 +84,23 @@ const Education = () => {
   ];
 
   return (
-    <section id="education" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white overflow-hidden">
-        {/* Animated Gradient Background */}
-        <div className="absolute inset-0 z-0">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-            <div className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2">
-                <div className="absolute w-full h-full bg-gradient-to-br from-green-500/10 via-blue-500/0 to-purple-500/10 blur-3xl animate-pulse-slow"></div>
-            </div>
-        </div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto">
-            <SectionTitle 
-              title="My Educational Journey" 
-              subtitle="The academic background that shaped my career"
-            />
+    <section id="education" className="relative py-10 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white overflow-hidden">
+      <AnimatedBackground />
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <SectionTitle 
+          title="My Educational Journey" 
+          subtitle="The academic background that shaped my career"
+        />
 
-            <div className="relative mt-16 space-y-8 lg:space-y-0">
-                {/* Vertical Timeline Line */}
-                <div className="absolute left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-gray-700/50 via-gray-600/50 to-gray-700/50 hidden lg:block"></div>
-                
-                {educationData.map((education, index) => (
-                    <TimelineItem key={education.id} data={education} index={index} />
-                ))}
-            </div>
+        <div className="relative mt-16 space-y-8 lg:space-y-0">
+          {/* Vertical Timeline Line */}
+          <div className="absolute left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-gray-700/50 via-gray-600/50 to-gray-700/50 hidden lg:block"></div>
+          
+          {educationData.map((education, index) => (
+            <TimelineItem key={education.id} data={education} index={index} />
+          ))}
         </div>
+      </div>
     </section>
   );
 };

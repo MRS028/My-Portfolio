@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import AnimatedBackground from "../../components/AnimatedBackground/AnimatedBackground";
+import { Element } from "react-scroll";
 
 // --- Mock Components (to remove external dependencies) ---
 
@@ -44,12 +46,31 @@ const CloseIcon = () => <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24"
 const ChevronLeftIcon = () => <svg className="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>;
 const ChevronRightIcon = () => <svg className="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>;
 
+// Add this new component after the existing icon components
+const ScrollArrow = ({ direction, onClick }) => (
+    <button 
+        onClick={onClick}
+        className="fixed right-8 bottom-8 p-3 rounded-full bg-gray-800/50 backdrop-blur-sm border border-white/10 hover:bg-gray-700/50 transition-all duration-300 z-50 group"
+        aria-label={`Scroll ${direction}`}
+    >
+        <svg 
+            className={`w-6 h-6 text-white transform transition-transform duration-300 ${direction === 'up' ? 'rotate-180' : ''} group-hover:scale-110`} 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+    </button>
+);
+
 // --- Main Component ---
 
 const ProjectShowcase = () => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [showScrollArrow, setShowScrollArrow] = useState(false);
 
     // Using placeholder images to avoid broken links.
     const projects = [
@@ -90,16 +111,42 @@ const ProjectShowcase = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isModalVisible, currentIndex]);
 
-    return (
-        <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gray-900 overflow-hidden">
-             {/* Animated Gradient Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-                <div className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2">
-                    <div className="absolute w-full h-full bg-gradient-to-br from-green-500/10 via-blue-500/0 to-purple-500/10 blur-3xl animate-pulse-slow"></div>
-                </div>
-            </div>
+    // Add scroll position tracking
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
             
+            // Show arrow when scrolled past 100px
+            setShowScrollArrow(scrollPosition > 100);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Add smooth scroll function
+    const scrollToSection = (direction) => {
+        const scrollOptions = {
+            behavior: 'smooth',
+            block: 'start'
+        };
+
+        if (direction === 'up') {
+            window.scrollTo({ top: 0, ...scrollOptions });
+        } else {
+            const nextSection = document.getElementById('projects').nextElementSibling;
+            if (nextSection) {
+                nextSection.scrollIntoView(scrollOptions);
+            }
+        }
+    };
+
+    return (
+        <section id="projects" className="relative py-5 px-4 sm:px-6 lg:px-8 bg-gray-900 overflow-hidden">
+            <Element id="project"></Element>
+            <AnimatedBackground />
             <div className="relative z-10 max-w-7xl mx-auto">
                 <SectionTitle title="My Projects" subtitle="A selection of my recent work" />
                 
@@ -133,66 +180,73 @@ const ProjectShowcase = () => {
                 </div>
 
                 {/* Project Modal */}
-                <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${isModalVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`} >
-                    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={closeModal}></div>
-                    
+                {isModalVisible && (
+                  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+                    <div className="fixed inset-0" onClick={closeModal}></div>
                     {selectedProject && (
-                        <div className="relative bg-gray-800 border border-gray-700 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl shadow-green-500/10"
-                             onClick={(e) => e.stopPropagation()}
-                        >
-                            <button onClick={closeModal} className="absolute top-4 right-4 p-2 rounded-full text-gray-400 hover:bg-gray-700/50 hover:text-white transition-colors" aria-label="Close modal">
-                                <CloseIcon />
-                            </button>
+                      <div className="relative w-[95%] max-w-4xl bg-gray-800 border border-gray-700 rounded-xl shadow-2xl shadow-green-500/10 mx-auto mt-6 md:mt-2 mb-4 overflow-y-auto max-h-[77vh] z-[10000]" onClick={e => e.stopPropagation()}>
+                        <button onClick={closeModal} className="absolute  md:top-4 right-4 p-2 rounded-full text-gray-400 hover:bg-gray-700/50 hover:text-white transition-colors z-[10001]" aria-label="Close modal">
+                            <CloseIcon />
+                        </button>
 
-                            <div className="p-6 md:p-8">
-                                <div className="relative mb-6">
-                                    <img onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/800x400/1f2937/FFFFFF?text=Image+Not+Found'; }} src={selectedProject.image} alt={selectedProject.title} className="w-full h-64 sm:h-80 object-cover rounded-lg" loading="lazy" />
-                                    <button onClick={(e) => {e.stopPropagation(); navigateProjects('prev')}} className="absolute top-1/2 left-2 md:-left-4 transform -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-colors" aria-label="Previous project">
-                                        <ChevronLeftIcon />
-                                    </button>
-                                    <button onClick={(e) => {e.stopPropagation(); navigateProjects('next')}} className="absolute top-1/2 right-2 md:-right-4 transform -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-colors" aria-label="Next project">
-                                        <ChevronRightIcon />
-                                    </button>
-                                </div>
+                        <div className="p-6 md:p-8 md:mt-10 mt-4">
+                            <div className="relative mb-6">
+                                <img onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/800x400/1f2937/FFFFFF?text=Image+Not+Found'; }} src={selectedProject.image} alt={selectedProject.title} className="w-full h-64 sm:h-80  rounded-lg" loading="lazy" />
+                                <button onClick={(e) => {e.stopPropagation(); navigateProjects('prev')}} className="absolute top-1/2 left-2 md:-left-4 transform -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-colors" aria-label="Previous project">
+                                    <ChevronLeftIcon />
+                                </button>
+                                <button onClick={(e) => {e.stopPropagation(); navigateProjects('next')}} className="absolute top-1/2 right-2 md:-right-4 transform -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-colors" aria-label="Next project">
+                                    <ChevronRightIcon />
+                                </button>
+                            </div>
 
-                                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">{selectedProject.title}</h3>
-                                <p className="text-gray-300 mb-6">{selectedProject.detailedDescription}</p>
-                                
-                                {selectedProject.features?.length > 0 && (
-                                    <div className="mb-6">
-                                        <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
-                                        <ul className="space-y-2 text-gray-300">
-                                            {selectedProject.features.map((feature, i) => (
-                                                <li key={i} className="flex items-start"><span className="text-green-400 mr-2 mt-1">&#10003;</span>{feature}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
-                                
+                            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">{selectedProject.title}</h3>
+                            <p className="text-gray-300 mb-6">{selectedProject.detailedDescription}</p>
+                            
+                            {selectedProject.features?.length > 0 && (
                                 <div className="mb-6">
-                                    <h4 className="text-lg font-semibold text-white mb-3">Technologies Used</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        {selectedProject.techStack.map((tech, i) => <TechTag key={i} tech={tech} />)}
-                                    </div>
+                                    <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
+                                    <ul className="space-y-2 text-gray-300">
+                                        {selectedProject.features.map((feature, i) => (
+                                            <li key={i} className="flex items-start"><span className="text-green-400 mr-2 mt-1">&#10003;</span>{feature}</li>
+                                        ))}
+                                    </ul>
                                 </div>
-                                
-                                <div className="flex flex-wrap gap-4 mt-8 border-t border-gray-700 pt-6">
-                                    {selectedProject.link && (
-                                        <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 hover:opacity-90 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
-                                            <ExternalLinkIcon /> Live Demo
-                                        </a>
-                                    )}
-                                    {selectedProject.github && (
-                                        <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-300">
-                                            <GithubIcon /> View Code
-                                        </a>
-                                    )}
+                            )}
+                            
+                            <div className="mb-6">
+                                <h4 className="text-lg font-semibold text-white mb-3">Technologies Used</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {selectedProject.techStack.map((tech, i) => <TechTag key={i} tech={tech} />)}
                                 </div>
                             </div>
+                            
+                            <div className="flex flex-wrap gap-4 mt-8 border-t border-gray-700 pt-6">
+                                {selectedProject.link && (
+                                    <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 hover:opacity-90 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
+                                        <ExternalLinkIcon /> Live Demo
+                                    </a>
+                                )}
+                                {selectedProject.github && (
+                                    <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-300">
+                                        <GithubIcon /> View Code
+                                    </a>
+                                )}
+                            </div>
                         </div>
+                      </div>
                     )}
-                </div>
+                  </div>
+                )}
             </div>
+            
+            {/* Add scroll arrow */}
+            {showScrollArrow && (
+                <ScrollArrow 
+                    direction={window.scrollY > window.innerHeight ? 'up' : 'down'} 
+                    onClick={() => scrollToSection(window.scrollY > window.innerHeight ? 'up' : 'down')} 
+                />
+            )}
         </section>
     );
 };

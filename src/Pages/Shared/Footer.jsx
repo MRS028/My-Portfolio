@@ -49,7 +49,12 @@ const Footer = () => {
         { icon: <UserIcon />, text: "About", url: "#about" },
         { icon: <ProjectIcon />, text: "Projects", url: "#projects" },
         { icon: <EducationIcon />, text: "Education", url: "#education" },
-        { icon: <ResumeIcon />, text: "Resume", url: "#resume" }
+        { icon: <ResumeIcon />, text: "Resume", url: "#home", onClick: () => {
+            const downloadButton = document.querySelector('#download-cv-button');
+            if (downloadButton) {
+                downloadButton.click();
+            }
+        }}
     ];
 
     const currentYear = new Date().getFullYear();
@@ -92,6 +97,12 @@ const Footer = () => {
                             <li key={index} className="transition-transform duration-300 hover:translate-x-1.5">
                                 <a
                                     href={link.url}
+                                    onClick={(e) => {
+                                        if (link.onClick) {
+                                            e.preventDefault();
+                                            link.onClick();
+                                        }
+                                    }}
                                     className="flex items-center text-gray-400 hover:text-green-400 transition-colors duration-300"
                                 >
                                     <span className="mr-3">{link.icon}</span>

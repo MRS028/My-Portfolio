@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AnimatedBackground from '../../components/AnimatedBackground/AnimatedBackground';
 
 // --- Self-contained Components (to remove dependencies) ---
 
@@ -90,15 +91,8 @@ function Contact() {
     ];
 
     return (
-        <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white overflow-hidden">
-            {/* Animated Gradient Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-                <div className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2">
-                    <div className="absolute w-full h-full bg-gradient-to-br from-green-500/10 via-blue-500/0 to-purple-500/10 blur-3xl animate-pulse-slow"></div>
-                </div>
-            </div>
-
+        <section id="contact" className="relative py-10 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white overflow-hidden">
+            <AnimatedBackground />
             <div className="relative z-10 max-w-7xl mx-auto">
                 <SectionTitle title="Get In Touch" subtitle="Let's build something amazing together." />
 
@@ -145,16 +139,16 @@ function Contact() {
                         </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Notification Toast */}
-            {notification && (
-                <Toast
-                    message={notification.message}
-                    type={notification.type}
-                    onclose={() => setNotification(null)}
-                />
-            )}
+                {/* Notification Toast */}
+                {notification && (
+                    <Toast
+                        message={notification.message}
+                        type={notification.type}
+                        onclose={() => setNotification(null)}
+                    />
+                )}
+            </div>
         </section>
     );
 }

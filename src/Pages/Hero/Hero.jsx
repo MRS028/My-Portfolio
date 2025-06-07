@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { FaDiagramProject, FaDownload } from "react-icons/fa6";
 import myCv from "../../assets/CV/myCv.pdf";
@@ -10,9 +10,43 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 import { Element, Link } from "react-scroll";
+import AnimatedBackground from "../../components/AnimatedBackground/AnimatedBackground";
 
 const Hero = () => {
   const canvasRef = useRef(null);
+  const [showScrollArrow, setShowScrollArrow] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Add scroll position tracking
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentPosition = window.scrollY;
+      setScrollPosition(currentPosition);
+      setShowScrollArrow(currentPosition > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Add smooth scroll function
+  const scrollToSection = () => {
+    const scrollOptions = {
+      behavior: 'smooth',
+      block: 'start'
+    };
+
+    if (scrollPosition > window.innerHeight) {
+      // If scrolled past hero section, scroll to top
+      window.scrollTo({ top: 0, ...scrollOptions });
+    } else {
+      // If in hero section, scroll to about
+      const aboutSection = document.getElementById('about');
+      if (aboutSection) {
+        aboutSection.scrollIntoView(scrollOptions);
+      }
+    }
+  };
 
   // Canvas animation logic is now inside the Hero component's useEffect
   useEffect(() => {
@@ -146,6 +180,7 @@ const Hero = () => {
 
   return (
     <section className="relative text-white pt-20 lg:pt-44 px-6 lg:px-24  lg:mb-0 overflow-hidden min-h-screen flex items-center">
+      <AnimatedBackground />
       {/* Canvas Element for the background */}
       <canvas
         ref={canvasRef}
@@ -234,6 +269,7 @@ const Hero = () => {
           </div>
           <div className="mt-8 flex justify-center lg:justify-start gap-4">
             <button
+              id="download-cv-button"
               onClick={() => {
                 const link = document.createElement("a");
                 link.href = myCv;
@@ -265,7 +301,24 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <Element name="about"></Element>
+      
+      {/* Add scroll arrow */}
+      {showScrollArrow && (
+        <button 
+          onClick={scrollToSection}
+          className="fixed right-8 bottom-8 p-3 rounded-full bg-gray-800/50 backdrop-blur-sm border border-white/10 hover:bg-gray-700/50 transition-all duration-300 z-50 group"
+          aria-label="Scroll"
+        >
+          <svg 
+            className={`w-6 h-6 text-white transform transition-transform duration-300 ${scrollPosition > window.innerHeight ? 'rotate-180' : ''} group-hover:scale-110`} 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </button>
+      )}
     </section>
   );
 };
