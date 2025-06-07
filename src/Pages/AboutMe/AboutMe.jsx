@@ -14,7 +14,7 @@ const SectionTitle = ({ title, subtitle }) => (
 // --- Code Snippet with Typing Animation, Sound, Pause on Hover ---
 const CodeSnippet = () => {
     const fullCode = [
-        `const coder = {`,
+        `const coder = {` ,
         `  name: 'Md. Rifat Sheikh',`,
         `  skills: ['React', 'Node.js', 'Express', 'MongoDB', 'Next.js', 'JWT'],`,
         `  hardWorker: true,`,
@@ -34,48 +34,49 @@ const CodeSnippet = () => {
     const intervalRef = useRef(null);
 
     useEffect(() => {
-        typingAudio.current = new Audio("/typing.mp3");
-        typingAudio.current.volume = 0.2;
-        typingAudio.current.loop = false;
+    typingAudio.current = new Audio("/typing.mp3");
+    typingAudio.current.volume = 0.2;
 
-        let currentIndex = 0;
-        let currentLine = 0;
+    let currentIndex = 0;
+    let currentLine = 0;
 
-        const startTyping = () => {
-            intervalRef.current = setInterval(() => {
-                if (!isPaused) {
-                    if (currentLine < fullCode.length) {
-                        const line = fullCode[currentLine];
-                        setTypedCode(prev => prev + line[currentIndex]);
+    const startTyping = () => {
+        intervalRef.current = setInterval(() => {
+            if (!isPaused) {
+                if (currentLine < fullCode.length) {
+                    const line = fullCode[currentLine];
+                    setTypedCode(prev => prev + line[currentIndex]);
 
-                        if (line[currentIndex] !== " " && line[currentIndex] !== undefined) {
-                            typingAudio.current.currentTime = 0;
-                            typingAudio.current.play();
-                        }
-
-                        currentIndex++;
-
-                        if (currentIndex === line.length) {
-                            currentIndex = 0;
-                            currentLine++;
-                            setTypedCode(prev => prev + '\n');
-                        }
-                    } else {
-                        clearInterval(intervalRef.current);
-                        setTimeout(() => {
-                            setTypedCode("");
-                            currentLine = 0;
-                            currentIndex = 0;
-                            startTyping(); // restart loop
-                        }, 2000);
+                    if (line[currentIndex] !== " " && line[currentIndex] !== undefined) {
+                        typingAudio.current.currentTime = 0;
+                        typingAudio.current.play();
                     }
-                }
-            }, 50);
-        };
 
-        startTyping();
-        return () => clearInterval(intervalRef.current);
-    }, [isPaused]);
+                    currentIndex++;
+
+                    if (currentIndex === line.length) {
+                        currentIndex = 0;
+                        currentLine++;
+                        setTypedCode(prev => prev + '\n');
+                    }
+                } else {
+                    clearInterval(intervalRef.current);
+                    setTimeout(() => {
+                        setTypedCode("");
+                        currentLine = 0;
+                        currentIndex = 0;
+                        startTyping(); // পুনরায় শুরু
+                    }, 2000);
+                }
+            }
+        }, 50);
+    };
+
+    startTyping();
+
+    return () => clearInterval(intervalRef.current); // cleanup
+}, []); 
+
 
     const highlightSyntax = (line) => {
         let highlightedLine = line.replace(/const|return|function/g, '<span class="text-pink-400">$&</span>');

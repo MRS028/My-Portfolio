@@ -3,4 +3,4 @@ services:
     name: my-portfolio
     env: static
     buildCommand: npm run build
-    staticPublishPath: dist
+    staticPublishPath: build

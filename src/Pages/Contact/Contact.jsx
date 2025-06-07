@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AnimatedBackground from '../../components/AnimatedBackground/AnimatedBackground';
+import AnimatedBackground from '@/Components/AnimatedBackground/AnimatedBackground';
 
 // --- Self-contained Components (to remove dependencies) ---
 
