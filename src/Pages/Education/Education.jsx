@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AnimatedBackground from '../../../components/AnimatedBackground/AnimatedBackground';
+import AnimatedBackground from '@/Components/AnimatedBackground/AnimatedBackground';
 
 // --- Inline SVG Icons (Replaces react-icons for compatibility) ---
 const UniversityIcon = (props) => (

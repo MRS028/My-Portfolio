@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import AnimatedBackground from "../../../components/AnimatedBackground/AnimatedBackground";
+import AnimatedBackground from "@/Components/AnimatedBackground/AnimatedBackground";
 import { Element } from "react-scroll";
 
 // --- Replicated SectionTitle for self-containment ---
