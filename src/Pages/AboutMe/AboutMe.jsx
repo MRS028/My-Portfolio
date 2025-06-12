@@ -30,13 +30,9 @@ const CodeSnippet = () => {
 
     const [typedCode, setTypedCode] = useState("");
     const [isPaused, setIsPaused] = useState(false);
-    const typingAudio = useRef(null);
     const intervalRef = useRef(null);
 
     useEffect(() => {
-    typingAudio.current = new Audio("/typing.mp3");
-    typingAudio.current.volume = 0.2;
-
     let currentIndex = 0;
     let currentLine = 0;
 
@@ -46,11 +42,6 @@ const CodeSnippet = () => {
                 if (currentLine < fullCode.length) {
                     const line = fullCode[currentLine];
                     setTypedCode(prev => prev + line[currentIndex]);
-
-                    if (line[currentIndex] !== " " && line[currentIndex] !== undefined) {
-                        typingAudio.current.currentTime = 0;
-                        typingAudio.current.play();
-                    }
 
                     currentIndex++;
 

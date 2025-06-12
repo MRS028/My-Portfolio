@@ -179,7 +179,7 @@ const Hero = () => {
   }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
-    <section className="relative text-white pt-20 lg:pt-44 px-6 lg:px-24  lg:mb-0 overflow-hidden min-h-screen flex items-center">
+    <section className="relative text-white pt-40 lg:pt-52 px-6 md:min-h-screen pb-16 lg:px-24  lg:mb-0 overflow-hidden flex items-center">
       <AnimatedBackground />
       {/* Canvas Element for the background */}
       <canvas

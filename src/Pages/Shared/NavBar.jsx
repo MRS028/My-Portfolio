@@ -99,7 +99,7 @@ const NavBar = () => {
       >
         <div className="flex justify-end p-4">
            <button onClick={() => setMenuOpen(false)} className="text-white text-2xl">
-              <HiX />
+              {/* <HiX /> */}
            </button>
         </div>
         <ul className="menu p-4 space-y-4">{renderLinks(true)}</ul>

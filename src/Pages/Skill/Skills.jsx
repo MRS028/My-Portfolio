@@ -77,10 +77,10 @@ const Skills = () => {
 
             <div className="relative z-10 px-4">
                 <SectionTitle title="Core Technologies" subtitle="My toolkit for building modern web applications." />
-                <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-                    <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll">
-                        {skillsForMarquee.map((skill, index) => (
-                            <li key={index}>
+                <div className="relative w-full overflow-hidden">
+                    <div className="animate-infinite-scroll">
+                        {marqueeSkills.map((skill, index) => (
+                            <div key={index} className="flex-shrink-0 mx-4">
                                 <div className="group relative flex flex-col items-center justify-center w-36 h-36 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl transition-all duration-300 hover:bg-white/10">
                                     <div className="absolute -inset-px bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
                                     <div className="relative z-10 flex flex-col items-center transition-transform duration-300 group-hover:scale-110">
@@ -88,9 +88,20 @@ const Skills = () => {
                                         <span className="mt-3 text-white font-medium text-sm">{skill.name}</span>
                                     </div>
                                 </div>
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+                        {marqueeSkills.map((skill, index) => (
+                            <div key={`duplicate-${index}`} className="flex-shrink-0 mx-4">
+                                <div className="group relative flex flex-col items-center justify-center w-36 h-36 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl transition-all duration-300 hover:bg-white/10">
+                                    <div className="absolute -inset-px bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
+                                    <div className="relative z-10 flex flex-col items-center transition-transform duration-300 group-hover:scale-110">
+                                        {skill.icon}
+                                        <span className="mt-3 text-white font-medium text-sm">{skill.name}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="max-w-6xl mx-auto mt-24">

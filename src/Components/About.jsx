@@ -29,7 +29,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className={`py-20 transition-all duration-500 ${
+    <section id="about" className={`py-2 transition-all duration-500 ${
       isDark 
         ? 'bg-gradient-to-br from-gray-900 via-blue-900/5 to-gray-900'
         : 'bg-gradient-to-br from-gray-50 via-blue-50/20 to-gray-50'
@@ -67,7 +67,7 @@ const About = () => {
                 scale: 1.05,
                 transition: { duration: 0.2 }
               }}
-              className={`p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${
+              className={`p-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${
                 isDark
                   ? 'bg-gradient-to-br from-gray-800 to-gray-800/50 hover:shadow-blue-500/10'
                   : 'bg-gradient-to-br from-white to-blue-50/50 hover:shadow-blue-500/20'
