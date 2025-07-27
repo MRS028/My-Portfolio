@@ -71,6 +71,7 @@ const ProjectShowcase = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [showScrollArrow, setShowScrollArrow] = useState(false);
+    const [atTop, setAtTop] = useState(true);
 
     // Using placeholder images to avoid broken links.
     const projects = [
@@ -115,30 +116,24 @@ const ProjectShowcase = () => {
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            
-            // Show arrow when scrolled past 100px
             setShowScrollArrow(scrollPosition > 100);
+            setAtTop(scrollPosition < 50);
         };
 
         window.addEventListener('scroll', handleScroll);
+        handleScroll(); // initialize on mount
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     // Add smooth scroll function
     const scrollToSection = (direction) => {
-        const scrollOptions = {
-            behavior: 'smooth',
-            block: 'start'
-        };
-
         if (direction === 'up') {
-            window.scrollTo({ top: 0, ...scrollOptions });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-            const nextSection = document.getElementById('projects').nextElementSibling;
-            if (nextSection) {
-                nextSection.scrollIntoView(scrollOptions);
+            // Scroll to the next section after #projects
+            const section = document.getElementById('projects');
+            if (section && section.nextElementSibling) {
+                section.nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     };
@@ -147,7 +142,8 @@ const ProjectShowcase = () => {
         <section id="projects" className="relative py-5 px-4 sm:px-6 lg:px-8 bg-gray-900 overflow-hidden">
             <Element id="project"></Element>
             <AnimatedBackground />
-            <div className="relative z-10 max-w-7xl mx-auto">
+            {/* Main content wrapper with blur when modal is open */}
+            <div className={`relative z-10 max-w-7xl mx-auto transition-all duration-300 ${isModalVisible ? "blur-md pointer-events-none select-none" : ""}`}>
                 <SectionTitle title="My Projects" subtitle="A selection of my recent work" />
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -156,7 +152,7 @@ const ProjectShowcase = () => {
                              className="group relative bg-gray-800/50 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-green-500/10 hover:border-green-500/30 hover:-translate-y-2 cursor-pointer"
                              onClick={() => handleViewMore(project, index)}
                         >
-                             <div className="absolute -inset-px bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
+                             <div className="absolute -inset-px bg-gradient-to-r  rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
                             <div className="relative">
                                 <img onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/1f2937/FFFFFF?text=Image+Not+Found'; }} src={project.image} alt={project.title} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
@@ -178,73 +174,73 @@ const ProjectShowcase = () => {
                         </div>
                     ))}
                 </div>
+            </div>
 
-                {/* Project Modal */}
-                {isModalVisible && (
-                  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm">
-                    <div className="fixed inset-0" onClick={closeModal}></div>
-                    {selectedProject && (
-                      <div className="relative w-[95%] max-w-4xl bg-gray-800 border border-gray-700 rounded-xl shadow-2xl shadow-green-500/10 mx-auto mt-6 md:mt-2 mb-4 overflow-y-auto max-h-[77vh] z-[10000]" onClick={e => e.stopPropagation()}>
-                        <button onClick={closeModal} className="absolute  md:top-4 right-4 p-2 rounded-full text-gray-400 hover:bg-gray-700/50 hover:text-white transition-colors z-[10001]" aria-label="Close modal">
-                            <CloseIcon />
-                        </button>
+            {/* Project Modal */}
+            {isModalVisible && (
+              <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+                <div className="fixed inset-0" onClick={closeModal}></div>
+                {selectedProject && (
+                  <div className="relative w-[95%] max-w-4xl bg-gray-800 border border-gray-700 rounded-xl shadow-2xl shadow-green-500/10 mx-auto mt-6 md:mt-2 mb-4 overflow-y-auto max-h-[77vh] z-[10000]" onClick={e => e.stopPropagation()}>
+                    <button onClick={closeModal} className="absolute  md:top-4 right-4 p-2 rounded-full text-gray-400 hover:bg-gray-700/50 hover:text-white transition-colors z-[10001]" aria-label="Close modal">
+                        <CloseIcon />
+                    </button>
 
-                        <div className="p-6 md:p-8 md:mt-10 mt-4">
-                            <div className="relative mb-6">
-                                <img onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/800x400/1f2937/FFFFFF?text=Image+Not+Found'; }} src={selectedProject.image} alt={selectedProject.title} className="w-full h-64 sm:h-80  rounded-lg" loading="lazy" />
-                                <button onClick={(e) => {e.stopPropagation(); navigateProjects('prev')}} className="absolute top-1/2 left-2 md:-left-4 transform -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-colors" aria-label="Previous project">
-                                    <ChevronLeftIcon />
-                                </button>
-                                <button onClick={(e) => {e.stopPropagation(); navigateProjects('next')}} className="absolute top-1/2 right-2 md:-right-4 transform -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-colors" aria-label="Next project">
-                                    <ChevronRightIcon />
-                                </button>
-                            </div>
+                    <div className="p-6 md:p-8 md:mt-10 mt-4">
+                        <div className="relative mb-6">
+                            <img onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/800x400/1f2937/FFFFFF?text=Image+Not+Found'; }} src={selectedProject.image} alt={selectedProject.title} className="w-full h-64 sm:h-80  rounded-lg" loading="lazy" />
+                            <button onClick={(e) => {e.stopPropagation(); navigateProjects('prev')}} className="absolute top-1/2 left-2 md:-left-4 transform -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-colors" aria-label="Previous project">
+                                <ChevronLeftIcon />
+                            </button>
+                            <button onClick={(e) => {e.stopPropagation(); navigateProjects('next')}} className="absolute top-1/2 right-2 md:-right-4 transform -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-colors" aria-label="Next project">
+                                <ChevronRightIcon />
+                            </button>
+                        </div>
 
-                            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">{selectedProject.title}</h3>
-                            <p className="text-gray-300 mb-6">{selectedProject.detailedDescription}</p>
-                            
-                            {selectedProject.features?.length > 0 && (
-                                <div className="mb-6">
-                                    <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
-                                    <ul className="space-y-2 text-gray-300">
-                                        {selectedProject.features.map((feature, i) => (
-                                            <li key={i} className="flex items-start"><span className="text-green-400 mr-2 mt-1">&#10003;</span>{feature}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                            
+                        <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">{selectedProject.title}</h3>
+                        <p className="text-gray-300 mb-6">{selectedProject.detailedDescription}</p>
+                        
+                        {selectedProject.features?.length > 0 && (
                             <div className="mb-6">
-                                <h4 className="text-lg font-semibold text-white mb-3">Technologies Used</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {selectedProject.techStack.map((tech, i) => <TechTag key={i} tech={tech} />)}
-                                </div>
+                                <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
+                                <ul className="space-y-2 text-gray-300">
+                                    {selectedProject.features.map((feature, i) => (
+                                        <li key={i} className="flex items-start"><span className="text-green-400 mr-2 mt-1">&#10003;</span>{feature}</li>
+                                    ))}
+                                </ul>
                             </div>
-                            
-                            <div className="flex flex-wrap gap-4 mt-8 border-t border-gray-700 pt-6">
-                                {selectedProject.link && (
-                                    <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 hover:opacity-90 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
-                                        <ExternalLinkIcon /> Live Demo
-                                    </a>
-                                )}
-                                {selectedProject.github && (
-                                    <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-300">
-                                        <GithubIcon /> View Code
-                                    </a>
-                                )}
+                        )}
+                        
+                        <div className="mb-6">
+                            <h4 className="text-lg font-semibold text-white mb-3">Technologies Used</h4>
+                            <div className="flex flex-wrap gap-2">
+                                {selectedProject.techStack.map((tech, i) => <TechTag key={i} tech={tech} />)}
                             </div>
                         </div>
-                      </div>
-                    )}
+                        
+                        <div className="flex flex-wrap gap-4 mt-8 border-t border-gray-700 pt-6">
+                            {selectedProject.link && (
+                                <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 hover:opacity-90 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
+                                    <ExternalLinkIcon /> Live Demo
+                                </a>
+                            )}
+                            {selectedProject.github && (
+                                <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-300">
+                                    <GithubIcon /> View Code
+                                </a>
+                            )}
+                        </div>
+                    </div>
                   </div>
                 )}
-            </div>
+              </div>
+            )}
             
             {/* Add scroll arrow */}
             {showScrollArrow && (
                 <ScrollArrow 
-                    direction={window.scrollY > window.innerHeight ? 'up' : 'down'} 
-                    onClick={() => scrollToSection(window.scrollY > window.innerHeight ? 'up' : 'down')} 
+                    direction={atTop ? 'down' : 'up'} 
+                    onClick={() => scrollToSection(atTop ? 'down' : 'up')} 
                 />
             )}
         </section>

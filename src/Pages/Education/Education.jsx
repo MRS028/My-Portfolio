@@ -50,7 +50,7 @@ const TimelineItem = ({ data, index }) => {
             {/* Card */}
             <div className={`w-full lg:w-5/12 transition-all duration-700 ease-out ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <div className="group relative bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-white/10 shadow-lg hover:shadow-green-500/10 transition-shadow duration-300">
-                     <div className="absolute -inset-px bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
+                     <div className="absolute -inset-px bg-gradient-to-r from-green-700 via-blue-800 to-purple-700 rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
                     <div className="relative z-10">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
                             <h3 className="text-xl font-bold text-white">{data.title}</h3>

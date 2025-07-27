@@ -49,7 +49,7 @@ const AnimatedSkillCard = ({ tech, index }) => {
 
     return (
         <div className={`group relative bg-gray-800/50 backdrop-blur-sm p-8 text-center rounded-2xl border border-white/10 shadow-lg transition-all duration-500 ease-out hover:border-white/20 hover:-translate-y-2 hover:shadow-green-500/10 ${ isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8' }`} >
-            <div className="absolute -inset-px bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 blur-lg"></div>
+            <div className="absolute -inset-px bg-gradient-to-r from-green-700 via-blue-800 to-purple-700 rounded-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 blur-lg"></div>
             <div className="relative z-10 flex flex-col items-center">
                 <div className="mb-6 flex justify-center">
                     <IconComponent className={`mb-4 ${colorClass}`} />
