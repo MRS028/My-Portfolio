@@ -139,8 +139,8 @@ const ProjectShowcase = () => {
     };
 
     return (
-        <section id="projects" className="relative py-5 px-4 sm:px-6 lg:px-8 bg-gray-900 overflow-hidden">
-            <Element id="project"></Element>
+        <section id="project" className="relative py-5 px-4 sm:px-6 lg:px-8 bg-gray-900 overflow-hidden">
+            {/* <Element id="project"></Element> */}
             <AnimatedBackground />
             {/* Main content wrapper with blur when modal is open */}
             <div className={`relative z-10 max-w-7xl mx-auto transition-all duration-300 ${isModalVisible ? "blur-md pointer-events-none select-none" : ""}`}>

@@ -14,9 +14,9 @@ const SectionTitle = ({ title, subtitle }) => (
 // --- Code Snippet with Typing Animation, Sound, Pause on Hover ---
 const CodeSnippet = () => {
     const fullCode = [
-        `const coder = {` ,
+        ` const coder = {` ,
         `  name: 'Md. Rifat Sheikh',`,
-        `  skills: ['React', 'Node.js', 'Express', 'MongoDB', 'Next.js', 'JWT'],`,
+        `  skills: ['React', 'Node.js', 'Express', 'MongoDB', 'RDBMS', 'Next.js', 'JWT'],`,
         `  hardWorker: true,`,
         `  quickLearner: true,`,
         `  problemSolver: true,`,
@@ -56,16 +56,16 @@ const CodeSnippet = () => {
                         setTypedCode("");
                         currentLine = 0;
                         currentIndex = 0;
-                        startTyping(); // পুনরায় শুরু
+                        startTyping(); 
                     }, 2000);
                 }
             }
-        }, 50);
+        }, 40); 
     };
 
     startTyping();
 
-    return () => clearInterval(intervalRef.current); // cleanup
+    return () => clearInterval(intervalRef.current); 
 }, []); 
 
 
@@ -83,7 +83,7 @@ const CodeSnippet = () => {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
-            <div className="absolute -inset-px bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
+            <div className="absolute -inset-px bg-gradient-to-r from-green-700 via-blue-800 to-purple-700 rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
             <div className="relative p-4">
                 <div className="flex items-center pb-3 border-b border-gray-700">
                     <div className="h-3 w-3 rounded-full bg-red-500 mr-2"></div>
@@ -107,15 +107,15 @@ const CodeSnippet = () => {
 // --- Main AboutMe Component ---
 const AboutMe = () => {
     return (
-        <section className="relative py-20 overflow-hidden bg-gray-900 text-white">
-            <Element name="about"></Element>
+        <section id="about" className="relative py-20 overflow-hidden bg-gray-900 text-white">
+            {/* <Element name="about"></Element> */}
             <AnimatedBackground />
             <div className="relative z-10 container mx-auto px-6">
                 <SectionTitle title="About Me" subtitle="A passionate developer on a mission to build great things." />
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="bg-gray-800/30 backdrop-blur-sm border border-white/10 p-8 rounded-xl">
-                        <h3 className="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400">Who I Am</h3>
+                        <h3 className="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-700 to-blue-400">Who I Am</h3>
                         <p className="text-lg text-gray-300 leading-relaxed text-justify">
                             I am MD. Rifat Sheikh, a Junior MERN Stack Developer with a deep interest in creating web applications using <span className="text-cyan-300">React</span>, <span className="text-green-400">Node.js</span>, <span className="text-gray-300">Express</span>, and <span className="text-green-300">MongoDB</span>. I am passionate about writing clean, efficient code that solves real-world problems and enhances the user experience. I'm always eager to learn new technologies and continuously improve my skills.
                         </p>
@@ -130,7 +130,7 @@ const AboutMe = () => {
                 </div>
             </div>
 
-            <div id="about"></div>
+            {/* <div id="about"></div> */}
         </section>
     );
 };

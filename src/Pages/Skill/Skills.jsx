@@ -113,7 +113,7 @@ const Skills = () => {
                      </div>
                 </div>
             </div>
-            <div id="project"></div>
+            {/* <div id="project"></div> */}
         </section>
     );
 };
