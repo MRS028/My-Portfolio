@@ -8,7 +8,7 @@ import ProjectShowcase from '../Projects/ProjectShowcase';
 
 const Home = () => {
     return (
-        <div>
+        <div className='max-w-7xl mx-auto'>
             <Hero></Hero>
             <AboutMe></AboutMe>
             <Skills></Skills>

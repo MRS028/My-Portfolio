@@ -79,26 +79,33 @@ const CodeSnippet = () => {
 
     return (
         <div
-            className="group relative bg-gray-800/50 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl"
+            className="group relative bg-gray-800/50 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl
+                w-full max-w-xl mx-auto
+                p-2 sm:p-2
+                text-xs sm:text-sm md:text-base  overflow-hidden
+                "
+            style={{ minWidth: 0 }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
             <div className="absolute -inset-px bg-gradient-to-r from-green-700 via-blue-800 to-purple-700 rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
-            <div className="relative p-4">
+            <div className="relative p-0 sm:p-2">
                 <div className="flex items-center pb-3 border-b border-gray-700">
                     <div className="h-3 w-3 rounded-full bg-red-500 mr-2"></div>
                     <div className="h-3 w-3 rounded-full bg-yellow-500 mr-2"></div>
                     <div className="h-3 w-3 rounded-full bg-green-500"></div>
                 </div>
-                <pre className="text-white font-mono text-sm sm:text-base p-4 whitespace-pre-wrap">
-                    {typedCode.split('\n').map((line, i) => (
-                        <div key={i}>
-                            <span className="text-gray-500 select-none mr-4">{i + 1}</span>
-                            {highlightSyntax(line)}
-                        </div>
-                    ))}
-                    <span className="bg-green-400 h-4 w-0.5 inline-block animate-pulse"></span>
-                </pre>
+                <div className="overflow-x-auto md:overflow-x-hidden mt-2 md:mt-1">
+                    <pre className="text-white font-mono text-xs sm:text-sm md:text-base p-0 sm:p-4 whitespace-pre min-w-full">
+                        {typedCode.split('\n').map((line, i) => (
+                            <div key={i} className="flex min-w-max">
+                                <span className="text-gray-500 select-none mr-2 sm:mr-4">{i + 1}</span>
+                                {highlightSyntax(line)}
+                            </div>
+                        ))}
+                        <span className="bg-green-400 h-4 w-0.5 inline-block animate-pulse"></span>
+                    </pre>
+                </div>
             </div>
         </div>
     );
@@ -107,7 +114,7 @@ const CodeSnippet = () => {
 // --- Main AboutMe Component ---
 const AboutMe = () => {
     return (
-        <section id="about" className="relative py-20 overflow-hidden bg-gray-900 text-white">
+        <section id="about" className="relative py-2 overflow-hidden bg-gray-900 text-white">
             {/* <Element name="about"></Element> */}
             <AnimatedBackground />
             <div className="relative z-10 container mx-auto px-6">
