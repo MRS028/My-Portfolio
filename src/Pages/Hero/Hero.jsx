@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { Element, Link } from "react-scroll";
 import AnimatedBackground from "../../components/AnimatedBackground/AnimatedBackground";
+import { BsYoutube } from "react-icons/bs";
 
 const Hero = () => {
   const canvasRef = useRef(null);
@@ -199,7 +200,7 @@ const Hero = () => {
         {/* Text Content */}
         <div className="lg:w-1/2 text-center pt-5 lg:text-left lg:mb-0">
           <h1 className="text-4xl lg:text-5xl font-bold leading-tight drop-shadow-lg">
-            Hi, I'm <br className="lg:hidden" />
+            Hi, I'm <br className="" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-blue-400 to-purple-400">
               MD. RIFAT SHEIKH
             </span>
@@ -259,12 +260,20 @@ const Hero = () => {
               <FaGithub />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/sheikh_riifat"
               target="_blank"
               rel="noopener noreferrer"
               className="text-2xl text-gray-300 hover:text-white hover:scale-110 transition-all duration-300"
             >
               <FaInstagram />
+            </a>
+            <a
+              href="https://youtube.com/@InfinityLearnBD"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-2xl text-gray-300 hover:text-white hover:scale-110 transition-all duration-300"
+            >
+              <BsYoutube />
             </a>
           </div>
           <div className="mt-8 flex justify-center lg:justify-start gap-4">
