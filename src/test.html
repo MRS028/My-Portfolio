@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Cover Banner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .linkedin-banner {
+            width: 1584px;
+            height: 396px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .banner-background {
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            position: absolute;
+            inset: 0;
+        }
+
+        .banner-background::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 100 100"><path d="M25 10 L75 10 L100 50 L75 90 L25 90 L0 50 Z" fill="none" stroke="rgba(0, 119, 255, 0.05)" stroke-width="2"/></svg>');
+            background-repeat: repeat;
+            opacity: 0.4;
+        }
+
+        .banner-background::after {
+            content: '';
+            position: absolute;
+            width: 1200px;
+            height: 1200px;
+            top: -400px;
+            left: -200px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.25) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body>
+    <div class="linkedin-banner">
+        <div class="banner-background"></div>
+
+        <div class="relative z-10 flex items-center justify-between w-full h-full px-16">
+            <!-- Left: Info -->
+            <div class="flex flex-col text-white max-w-3xl">
+                <h1 class="text-6xl font-bold tracking-tight">Md. Rifat Sheikh</h1>
+                <p class="text-2xl text-blue-400 mt-2 font-light">MERN Stack Developer (Junior)</p>
+
+                <div class="mt-6 border-l-2 border-blue-500 pl-4 space-y-1">
+                    <p class="text-lg text-gray-300">React | Node.js | Express | MongoDB | TypeScript | Firebase</p>
+                    <p class="text-lg text-gray-300">Generative & Agentic AI Enthusiast | AI / ML / DL</p>
+                    <p class="text-lg text-gray-300">CSE Undergrad @ SEU</p>
+                </div>
+
+                <!-- Contacts -->
+                <div class="flex items-center space-x-6 mt-10 flex-wrap">
+                    <!-- Phone -->
+                    <a href="tel:+8801521704690" class="flex items-center space-x-2 hover:text-blue-300 transition">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.684l1.5 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.5a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        <span class="text-gray-300 text-sm">+880 1521-704690</span>
+                    </a>
+                    <!-- Email -->
+                    <a href="mailto:skrifat483@gmail.com" class="flex items-center space-x-2 hover:text-blue-300 transition">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <span class="text-gray-300 text-sm">skrifat483@gmail.com</span>
+                    </a>
+                    <!-- Portfolio -->
+                    <a href="https://md-rifat-sheikh.netlify.app" target="_blank" class="flex items-center space-x-2 hover:text-blue-300 transition">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3"/></svg>
+                        <span class="text-gray-300 text-sm">Portfolio</span>
+                    </a>
+                    <!-- GitHub -->
+                    <a href="https://github.com/MRS028" target="_blank" class="flex items-center space-x-2 hover:text-blue-300 transition">
+                        <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.29 3.438 9.773 8.207 11.363.6.11.793-.26.793-.577v-2.17c-3.338.726-4.043-1.61-4.043-1.61-.546-1.385-1.333-1.754-1.333-1.754-1.09-.745.083-.73.083-.73 1.205.085 1.838 1.237 1.838 1.237 1.07 1.835 2.807 1.305 3.492.998.107-.774.418-1.305.76-1.605-2.665-.303-5.467-1.333-5.467-5.931 0-1.31.467-2.382 1.235-3.222-.124-.303-.535-1.522.118-3.176 0 0 1.008-.322 3.302 1.23a11.47 11.47 0 016.004 0c2.294-1.552 3.302-1.23 3.302-1.23.653 1.654.242 2.873.118 3.176.768.84 1.235 1.912 1.235 3.222 0 4.61-2.807 5.623-5.48 5.921.43.37.815 1.103.815 2.222v3.293c0 .317.193.688.8.572C20.565 22.273 24 17.79 24 12.5 24 5.87 18.63.5 12 .5z" clip-rule="evenodd"/></svg>
+                        <span class="text-gray-300 text-sm">GitHub</span>
+                    </a>
+                    <!-- Location -->
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0"/></svg>
+                        <span class="text-gray-300 text-sm">Dhaka, Bangladesh</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Headshot -->
+            <div class="flex-shrink-0">
+                <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg shadow-blue-500/30">
+                    <img src="/public/meDp.JPG" alt="Profile" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
