@@ -143,6 +143,38 @@ const ProjectShowcase = () => {
   // Using placeholder images to avoid broken links.
   const projects = [
     {
+      title: "Coaching Management System",
+      image: "https://i.ibb.co.com/n8tLC91d/image.png",
+      link: "https://oddhayon-coaching-center.netlify.app",
+      github:
+        "https://github.com/MRS028/Coaching-Management-System-Client-Side",
+      description:
+        "A MERN stack application for managing coaching center operations with role-based dashboards and complete course management.",
+      techStack: [
+        "React",
+        "Firebase",
+        "Tailwind",
+        "DaisyUI",
+        "MongoDB",
+        "Node",
+        "Express",
+        "JWT",
+        "Vite",
+        "TanStack Query",
+      ],
+      detailedDescription:
+        "CMS offers a comprehensive solution for managing coaching centers, providing role-based dashboards for admins, teachers, and students. The platform streamlines course management, student admissions, payment processing, and class routines with an intuitive interface and secure authentication system.",
+      features: [
+        "Role-based authentication and authorization",
+        "Course management and enrollment system",
+        "Student admission workflow with PDF generation",
+        "Payment integration and transaction tracking",
+        "Class routine management and scheduling",
+        "Responsive design with modern UI components",
+      ],
+    },
+
+    {
       title: "QuizMind: An Interactive Quiz App",
       image: "https://i.ibb.co.com/8LNBXdVf/Screenshot-2025-08-10-131329.png",
       link: "https://testquizapp28.netlify.app",
@@ -304,7 +336,6 @@ const ProjectShowcase = () => {
         "Responsive design",
       ],
     },
-    
   ];
 
   const handleViewMore = (project, index) => {
