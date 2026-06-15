@@ -446,7 +446,7 @@ const ProjectShowcase = () => {
                   {project.description}
                 </p>
 
-                <div className="flex pt-3 flex-wrap gap-2 mb-4">
+                <div className="flex pt-8 md:pt-3 flex-wrap gap-2 mb-4">
                   {project.techStack.slice(0, 3).map((tech, i) => (
                     <TechTag key={i} tech={tech} />
                   ))}

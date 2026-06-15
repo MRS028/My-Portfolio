@@ -276,7 +276,7 @@ const Hero = () => {
               <BsYoutube />
             </a>
           </div>
-          <div className="mt-8 flex justify-center lg:justify-start gap-4">
+          <div className="mt-8 flex justify-center lg:justify-start gap-2 md:gap-4">
             <button
               id="download-cv-button"
               onClick={() => {
@@ -290,7 +290,7 @@ const Hero = () => {
               <FaDownload size={14} /> Download CV
             </button>
             <Link to="project" smooth={true} duration={500}>
-              <button className="btn bg-gray-700/50 backdrop-blur-sm border border-gray-600 hover:bg-gray-700/80 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+              <button className="btn bg-gray-700/50 backdrop-blur-sm border border-gray-600 hover:bg-gray-700/80 text-white font-semibold py-3 px:2 md:px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
                 <FaDiagramProject size={14} />
                 View Projects
               </button>
