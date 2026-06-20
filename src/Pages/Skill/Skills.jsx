@@ -13,18 +13,18 @@ const MongoIcon = ({ className }) => <svg className={className} width="48" heigh
 
 // --- Component Data ---
 const marqueeSkills = [
-  { name: "React", icon: <ReactIcon className="h-10 w-10 text-cyan-400" /> },
-  { name: "Next.js", icon: <ReactIcon className="h-10 w-10 text-gray-200" /> },
-  { name: "TypeScript", icon: <JsIcon className="h-10 w-10 text-blue-500" /> },
-  { name: "Tailwind", icon: <TailwindIcon className="h-10 w-10 text-teal-400" /> },
-  { name: "Node.js", icon: <NodeIcon className="h-10 w-10 text-green-500" /> },
-  { name: "MongoDB", icon: <MongoIcon className="h-10 w-10 text-green-400" /> },
-  { name: "Python", icon: <NodeIcon className="h-10 w-10 text-yellow-400" /> },
-  { name: "Scikit-Learn", icon: <NodeIcon className="h-10 w-10 text-red-400" /> },
-  { name: "TensorFlow", icon: <NodeIcon className="h-10 w-10 text-orange-500" /> },
-  { name: "NLP", icon: <NodeIcon className="h-10 w-10 text-purple-400" /> },
-  { name: "BiLSTM", icon: <NodeIcon className="h-10 w-10 text-pink-400" /> },
-  { name: "Three.js", icon: <ReactIcon className="h-10 w-10 text-indigo-400" /> },
+  { name: "React", icon: <ReactIcon className="h-8 w-8 text-cyan-400" /> },
+  { name: "Next.js", icon: <ReactIcon className="h-8 w-8 text-gray-200" /> },
+  { name: "TypeScript", icon: <JsIcon className="h-8 w-8 text-blue-500" /> },
+  { name: "Tailwind", icon: <TailwindIcon className="h-8 w-8 text-teal-400" /> },
+  { name: "Node.js", icon: <NodeIcon className="h-8 w-8 text-green-500" /> },
+  { name: "MongoDB", icon: <MongoIcon className="h-8 w-8 text-green-400" /> },
+  { name: "Python", icon: <NodeIcon className="h-8 w-8 text-yellow-400" /> },
+  { name: "Scikit-Learn", icon: <NodeIcon className="h-8 w-8 text-red-400" /> },
+  { name: "TensorFlow", icon: <NodeIcon className="h-8 w-8 text-orange-500" /> },
+  { name: "NLP", icon: <NodeIcon className="h-8 w-8 text-purple-400" /> },
+  { name: "BiLSTM", icon: <NodeIcon className="h-8 w-8 text-pink-400" /> },
+  { name: "Three.js", icon: <ReactIcon className="h-8 w-8 text-indigo-400" /> },
 ];
 
 const detailedTechnologies = [
@@ -161,16 +161,40 @@ const AnimatedSkillCard = ({ tech, index }) => {
     }, [index]);
 
     return (
-        <div className={`group relative bg-gray-800/50 backdrop-blur-sm p-8 text-center rounded-2xl border border-white/10 shadow-lg transition-all duration-500 ease-out hover:border-white/20 hover:-translate-y-2 hover:shadow-green-500/10 ${ isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8' }`} >
-            <div className="absolute -inset-px bg-gradient-to-r from-green-700 via-blue-800 to-purple-700 rounded-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 blur-lg"></div>
-            <div className="relative z-10 flex flex-col items-center">
-                <div className="mb-6 flex justify-center">
-                    <IconComponent className={`mb-4 ${colorClass}`} />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-                <p className="text-gray-400 text-sm">{description}</p>
-            </div>
-        </div>
+       <div
+  className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl transition-all duration-500 hover:border-cyan-400/50 hover:-translate-y-2 ${
+    isInView
+      ? "opacity-100 translate-y-0"
+      : "opacity-0 translate-y-8"
+  }`}
+>
+  {/* Glow */}
+  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-blue-500/10 opacity-0 group-hover:opacity-100 duration-500"></div>
+
+  <div className="relative z-10">
+    {/* Top */}
+    <div className="flex items-start justify-between mb-6">
+      <div
+        className={`flex items-center justify-center h-14 w-14 rounded-2xl bg-white/5 ${colorClass}`}
+      >
+        <IconComponent />
+      </div>
+
+      <span className="text-gray-600 group-hover:text-cyan-400 transition">
+        ↗
+      </span>
+    </div>
+
+    {/* Content */}
+    <h3 className="text-xl font-bold text-white mb-3">
+      {title}
+    </h3>
+
+    <p className="text-gray-400 text-sm leading-relaxed">
+      {description}
+    </p>
+  </div>
+</div>
     );
 };
 
@@ -179,55 +203,169 @@ const Skills = () => {
     const skillsForMarquee = [...marqueeSkills, ...marqueeSkills];
 
     return (
-        <section className="relative py-20 overflow-hidden bg-gray-900">
-            {/* Animated Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-                <div className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2">
-                    <div className="absolute w-full h-full bg-gradient-to-br from-green-500/10 via-blue-500/0 to-purple-500/10 blur-3xl animate-pulse-slow"></div>
-                </div>
-            </div>
+<div className="relative z-10 px-4 pt-10">
 
-            <div className="relative z-10 px-4">
-                <SectionTitle title="Core Technologies" subtitle="My toolkit for building modern web applications." />
-                <div className="relative w-full overflow-hidden">
-                    <div className="animate-infinite-scroll">
-                        {marqueeSkills.map((skill, index) => (
-                            <div key={index} className="flex-shrink-0 mx-4">
-                                <div className="group relative flex flex-col items-center justify-center w-36 h-36 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl transition-all duration-300 hover:bg-white/10">
-                                    <div className="absolute -inset-px bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
-                                    <div className="relative z-10 flex flex-col items-center transition-transform duration-300 group-hover:scale-110">
-                                        {skill.icon}
-                                        <span className="mt-3 text-white font-medium text-sm">{skill.name}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                        {marqueeSkills.map((skill, index) => (
-                            <div key={`duplicate-${index}`} className="flex-shrink-0 mx-4">
-                                <div className="group relative flex flex-col items-center justify-center w-36 h-36 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl transition-all duration-300 hover:bg-white/10">
-                                    <div className="absolute -inset-px bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
-                                    <div className="relative z-10 flex flex-col items-center transition-transform duration-300 group-hover:scale-110">
-                                        {skill.icon}
-                                        <span className="mt-3 text-white font-medium text-sm">{skill.name}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+  <SectionTitle
+    title="Skills & Technologies"
+    subtitle="Full Stack Developer • AI/ML Engineer • NLP Enthusiast"
+  />
 
-                <div className="max-w-6xl mx-auto mt-24">
-                     <SectionTitle title="Skill Details" subtitle="A closer look at what I can do with each technology."/>
-                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                         {detailedTechnologies.map((tech, index) => (
-                             <AnimatedSkillCard key={index} tech={tech} index={index} />
-                         ))}
-                     </div>
-                </div>
-            </div>
-            {/* <div id="project"></div> */}
-        </section>
+  {/* Top Skills */}
+  <div className="max-w-6xl mx-auto mb-20">
+    <div className="grid grid-cols-2 md:flex flex-wrap justify-center gap-4">
+      {marqueeSkills.map((skill, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-3 px-6 py-4 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md hover:border-cyan-400 transition-all duration-300"
+        >
+          {skill.icon}
+          <span className="text-white font-medium">
+            {skill.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Categories */}
+<div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 mb-24">
+
+  {[
+    {
+      title: "Frontend",
+      icon: "🌐",
+      color: "from-cyan-500 to-blue-500",
+      skills: ["React", "Next.js", "TypeScript", "Tailwind", "Redux"],
+    },
+    {
+      title: "Backend",
+      icon: "⚙️",
+      color: "from-green-500 to-emerald-500",
+      skills: ["Node.js", "Express", "MongoDB", "Firebase", "JWT"],
+    },
+    {
+      title: "AI / Machine Learning",
+      icon: "🤖",
+      color: "from-purple-500 to-indigo-500",
+      skills: [
+        "Python",
+        "Scikit-Learn",
+        "TensorFlow",
+        "Keras",
+        "Random Forest",
+      ],
+    },
+    {
+      title: "NLP & Deep Learning",
+      icon: "🧠",
+      color: "from-pink-500 to-rose-500",
+      skills: [
+        "NLP",
+        "BiLSTM",
+        "Transformers",
+        "BERT",
+        "Embeddings",
+      ],
+    },
+  ].map((category, index) => (
+<div
+  key={index}
+  className="
+    group relative overflow-hidden
+    rounded-3xl
+    border border-white/10
+    bg-white/[0.03]
+    backdrop-blur-xl
+    p-5 sm:p-6 lg:p-8
+    transition-all duration-500
+    hover:border-white/20
+    hover:-translate-y-1
+  "
+>
+  {/* Glow */}
+  <div
+    className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition duration-500 bg-gradient-to-br ${category.color}`}
+  />
+
+  <div className="relative z-10">
+
+    {/* Header */}
+    <div className="flex items-start justify-between mb-6">
+
+      <div className="flex gap-4 items-center">
+
+        <div className="h-14 w-14 rounded-2xl bg-white/5 flex items-center justify-center text-3xl">
+          {category.icon}
+        </div>
+
+        <div>
+          <h3
+            className={`text-xl sm:text-2xl font-bold bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}
+          >
+            {category.title}
+          </h3>
+
+          <p className="text-sm text-gray-500 mt-1">
+            Core Technologies
+          </p>
+        </div>
+
+      </div>
+
+      <div className="hidden md:flex h-10 w-10 rounded-xl bg-white/5 items-center justify-center text-gray-500 group-hover:text-white">
+        ↗
+      </div>
+
+    </div>
+
+    {/* Skills */}
+    <div className="flex flex-wrap gap-2">
+      {category.skills.map((item) => (
+        <span
+          key={item}
+          className="
+            px-3 py-2
+            rounded-xl
+            bg-black/20
+            border border-white/10
+            text-xs sm:text-sm
+            text-gray-300
+            hover:bg-white/10
+            transition
+          "
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+
+    {/* Footer */}
+    <div className="mt-5 flex items-center gap-2 text-xs text-gray-500">
+      <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse"></div>
+      Currently using in production
+    </div>
+
+  </div>
+</div>
+  ))}
+</div>
+
+  {/* Featured Technologies */}
+  <SectionTitle
+    title="Featured Technologies"
+    subtitle="Technologies I use the most"
+  />
+
+  <div className="max-w-7xl mx-auto grid  md:grid-cols-3 lg:grid-cols-4 gap-8">
+    {detailedTechnologies.map((tech, index) => (
+      <AnimatedSkillCard
+        key={index}
+        tech={tech}
+        index={index}
+      />
+    ))}
+  </div>
+</div>
     );
 };
 
