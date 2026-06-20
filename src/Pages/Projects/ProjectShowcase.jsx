@@ -173,6 +173,64 @@ const ProjectShowcase = () => {
         "Responsive design with modern UI components",
       ],
     },
+    {
+      title: "HSC GPA Predictor",
+      image: "https://i.ibb.co.com/DgQ4HhCh/image.png",
+      link: "https://huggingface.co/spaces/rafayet028/HSC_GPA_Predictor",
+      github: "https://github.com/MRS028/Student-Performance-Prediciton",
+      description:
+        "A machine learning web application that predicts HSC GPA using demographic, social, and academic factors through an interactive Gradio interface.",
+      techStack: [
+        "Python",
+        "Scikit-learn",
+        "Random Forest",
+        "Gradio",
+        "Pandas",
+        "NumPy",
+        "Pickle",
+      ],
+      detailedDescription:
+        "HSC GPA Predictor is an AI-powered student performance prediction system that estimates Higher Secondary Certificate (HSC) GPA based on 14 demographic, family, social, and academic factors. Built with a Random Forest Regressor and a Gradio-based interface, the platform helps students, educators, and counselors understand the factors influencing academic outcomes and provides performance insights with an intuitive user experience.",
+      features: [
+        "HSC GPA prediction using a Random Forest regression model",
+        "Interactive Gradio web interface with responsive design",
+        "Support for 14 demographic, social, and academic input factors",
+        "Automatic input validation and data sanitization",
+        "Performance interpretation with GPA range guidance",
+        "Trained pipeline with preprocessing and model persistence",
+        "Example configurations for high-performing and average students",
+        "Useful insights for educators, parents, and academic counselors",
+      ],
+    },
+    {
+      title: "Medical Insurance Cost Predictor",
+      image: "https://i.ibb.co.com/JWNT48hc/prediction-result.png",
+      link: "https://huggingface.co/spaces/mdrifatsheikh/Insurance-Prediction",
+      github: "https://github.com/MRS028/insurance-cost-predictor",
+      description:
+        "A machine learning-powered web application that predicts medical insurance costs based on demographic and lifestyle factors using Random Forest Regression.",
+      techStack: [
+        "Python",
+        "Scikit-learn",
+        "Random Forest",
+        "Gradio",
+        "Pandas",
+        "NumPy",
+        "Pickle",
+      ],
+      detailedDescription:
+        "Medical Insurance Cost Predictor is an interactive machine learning application that estimates a person's expected medical insurance expenses using demographic, lifestyle, and regional information. The system incorporates advanced feature engineering techniques such as smoker-age interaction, polynomial features, and region encoding to improve prediction accuracy. Built with Gradio, it provides a clean and user-friendly interface along with personalized recommendations based on risk factors.",
+      features: [
+        "Medical insurance cost prediction using Random Forest Regression",
+        "Advanced feature engineering including smoker-age interaction and polynomial terms",
+        "Automatic input validation for age, BMI, and number of children",
+        "Color-coded prediction categories for low, moderate, and high costs",
+        "Personalized recommendations based on predicted risk factors",
+        "Interactive and responsive Gradio interface",
+        "Scalable and modular Python application structure",
+        "Model persistence and feature scaling for reliable predictions",
+      ],
+    },
 
     {
       title: "QuizMind: An Interactive Quiz App",
@@ -200,6 +258,38 @@ const ProjectShowcase = () => {
         "Score tracking and performance summaries",
         "Answer explanations for learning improvement",
         "Potential admin tools for quiz management",
+      ],
+    },
+    {
+      title: "Minimal Library Management System",
+      image: "https://i.ibb.co.com/5gy8GQdx/image.png",
+      link: "https://librarymanagementwebapp.netlify.app/",
+      github: "https://github.com/MRS028/minimal-library-management-system",
+      description:
+        "A modern and responsive library management application for managing books, borrowing records, and tracking inventory with a clean user interface.",
+      techStack: [
+        "React",
+        "TypeScript",
+        "Redux Toolkit",
+        "RTK Query",
+        "Tailwind CSS",
+        "Vite",
+        "React Router",
+        "Node.js",
+        "Express",
+        "MongoDB",
+      ],
+      detailedDescription:
+        "Minimal Library Management System is a full-stack web application designed to streamline library operations. It provides book management, borrowing functionality, and borrow tracking with a responsive interface. Built with React, TypeScript, and Redux Toolkit, the application offers efficient state management and seamless API interactions while maintaining a modern and user-friendly experience.",
+      features: [
+        "Add, view, update, and delete book records",
+        "Book borrowing system with due date tracking",
+        "Borrow summary table with total borrowed quantities",
+        "Responsive design optimized for desktop and mobile devices",
+        "State management using Redux Toolkit and RTK Query",
+        "RESTful API integration for books and borrowing operations",
+        "TypeScript-based form validation for improved data integrity",
+        "Reusable UI components with modern design and Lucide icons",
       ],
     },
     {
