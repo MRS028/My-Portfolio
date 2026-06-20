@@ -13,20 +13,133 @@ const MongoIcon = ({ className }) => <svg className={className} width="48" heigh
 
 // --- Component Data ---
 const marqueeSkills = [
-    { name: "HTML", icon: <Html5Icon className="h-10 w-10 text-orange-500" /> }, { name: "CSS", icon: <Css3Icon className="h-10 w-10 text-blue-500" /> }, { name: "Tailwind", icon: <TailwindIcon className="h-10 w-10 text-teal-400" /> },
-    { name: "JavaScript", icon: <JsIcon className="h-10 w-10 text-yellow-400" /> }, { name: "React", icon: <ReactIcon className="h-10 w-10 text-cyan-400" /> }, { name: "Firebase", icon: <FirebaseIcon className="h-10 w-10 text-yellow-500" /> },
-    { name: "Node.js", icon: <NodeIcon className="h-10 w-10 text-green-500" /> }, { name: "MongoDB", icon: <MongoIcon className="h-10 w-10 text-green-400" /> }
+  { name: "React", icon: <ReactIcon className="h-10 w-10 text-cyan-400" /> },
+  { name: "Next.js", icon: <ReactIcon className="h-10 w-10 text-gray-200" /> },
+  { name: "TypeScript", icon: <JsIcon className="h-10 w-10 text-blue-500" /> },
+  { name: "Tailwind", icon: <TailwindIcon className="h-10 w-10 text-teal-400" /> },
+  { name: "Node.js", icon: <NodeIcon className="h-10 w-10 text-green-500" /> },
+  { name: "MongoDB", icon: <MongoIcon className="h-10 w-10 text-green-400" /> },
+  { name: "Python", icon: <NodeIcon className="h-10 w-10 text-yellow-400" /> },
+  { name: "Scikit-Learn", icon: <NodeIcon className="h-10 w-10 text-red-400" /> },
+  { name: "TensorFlow", icon: <NodeIcon className="h-10 w-10 text-orange-500" /> },
+  { name: "NLP", icon: <NodeIcon className="h-10 w-10 text-purple-400" /> },
+  { name: "BiLSTM", icon: <NodeIcon className="h-10 w-10 text-pink-400" /> },
+  { name: "Three.js", icon: <ReactIcon className="h-10 w-10 text-indigo-400" /> },
 ];
 
 const detailedTechnologies = [
-  { IconComponent: Html5Icon, colorClass: "text-orange-500", title: "HTML", description: "The standard markup language for creating the structure of web pages and applications." },
-  { IconComponent: Css3Icon, colorClass: "text-blue-500", title: "CSS", description: "Used to style and design web pages, controlling layout, colors, and fonts for visual appeal." },
-  { IconComponent: TailwindIcon, colorClass: "text-teal-400", title: "Tailwind CSS", description: "A utility-first CSS framework for rapid UI development without writing custom CSS." },
-  { IconComponent: JsIcon, colorClass: "text-yellow-500", title: "JavaScript", description: "A versatile programming language that makes web pages interactive and dynamic." },
-  { IconComponent: ReactIcon, colorClass: "text-cyan-400", title: "React.js", description: "A JavaScript library for building component-based user interfaces and single-page applications." },
-  { IconComponent: FirebaseIcon, colorClass: "text-yellow-500", title: "Firebase", description: "A platform offering backend services like authentication, real-time databases, and hosting." },
-  { IconComponent: NodeIcon, colorClass: "text-green-500", title: "Node.js", description: "A runtime environment for server-side JavaScript programming with asynchronous I/O." },
-  { IconComponent: MongoIcon, colorClass: "text-green-400", title: "MongoDB", description: "A NoSQL database program, using JSON-like documents with optional schemas." }
+  {
+    IconComponent: ReactIcon,
+    colorClass: "text-cyan-400",
+    title: "React.js",
+    description:
+      "Building modern and reusable user interfaces with hooks, components, and state management.",
+  },
+  {
+    IconComponent: ReactIcon,
+    colorClass: "text-gray-300",
+    title: "Next.js",
+    description:
+      "Creating full-stack applications with App Router, SSR, and API routes.",
+  },
+  {
+    IconComponent: JsIcon,
+    colorClass: "text-blue-500",
+    title: "TypeScript",
+    description:
+      "Developing scalable applications with static typing and maintainable code.",
+  },
+  {
+    IconComponent: TailwindIcon,
+    colorClass: "text-teal-400",
+    title: "Tailwind CSS",
+    description:
+      "Building beautiful and responsive user interfaces with utility-first CSS.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-green-500",
+    title: "Node.js & Express",
+    description:
+      "Building REST APIs and scalable backend applications with JavaScript.",
+  },
+  {
+    IconComponent: MongoIcon,
+    colorClass: "text-green-400",
+    title: "MongoDB",
+    description:
+      "Designing schemas and managing data efficiently using NoSQL databases.",
+  },
+  {
+    IconComponent: FirebaseIcon,
+    colorClass: "text-yellow-500",
+    title: "Firebase & JWT",
+    description:
+      "Authentication, authorization, and cloud services for modern applications.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-yellow-400",
+    title: "Python",
+    description:
+      "Automation, data analysis, CLI applications, and machine learning development.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-red-400",
+    title: "Machine Learning",
+    description:
+      "Building predictive models using Scikit-Learn, Random Forest, and feature engineering.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-orange-500",
+    title: "Deep Learning",
+    description:
+      "Working with TensorFlow and Keras to build neural networks and AI applications.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-purple-400",
+    title: "Natural Language Processing",
+    description:
+      "Text preprocessing, embeddings, tokenization, and sequence modeling.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-pink-400",
+    title: "BiLSTM",
+    description:
+      "Building sequence models for sentiment analysis and text classification tasks.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-indigo-400",
+    title: "Transformers & LLMs",
+    description:
+      "Exploring BERT, Hugging Face, embeddings, and large language models.",
+  },
+  {
+    IconComponent: ReactIcon,
+    colorClass: "text-violet-400",
+    title: "Three.js",
+    description:
+      "Creating interactive 3D graphics and immersive web experiences.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-white",
+    title: "Git & GitHub",
+    description:
+      "Version control, collaboration, CI/CD workflows, and project management.",
+  },
+  {
+    IconComponent: NodeIcon,
+    colorClass: "text-sky-400",
+    title: "Docker",
+    description:
+      "Containerizing applications and creating reproducible environments.",
+  },
 ];
 
 // Replicated SectionTitle to keep component self-contained

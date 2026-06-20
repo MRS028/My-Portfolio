@@ -6,65 +6,115 @@ import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 
 const technologies = [
   {
-    icon: <FaHtml5 className="text-orange-600 text-5xl mb-4" />,
-    title: "HTML",
-    description: "HTML is the standard markup language for creating web pages and web applications. It forms the backbone of any web project."
-  },
-  {
-    icon: <FaCss3Alt className="text-blue-500 text-5xl mb-4" />,
-    title: "CSS",
-    description: "CSS is used to style and design web pages. It controls the layout, colors, fonts, and more to make the web page visually appealing."
-  },
-  {
-    icon: <SiTailwindcss className="text-teal-400 text-5xl mb-4" />,
-    title: "Tailwind CSS",
-    description: "Tailwind CSS is a utility-first CSS framework that enables developers to create custom designs without writing custom CSS."
-  },
-  {
-    icon: <SiDaisyui className="text-pink-500 text-5xl mb-4" />,
-    title: "daisyUI",
-    description: "daisyUI is a component library built on top of Tailwind CSS, providing pre-designed components for faster development."
-  },
-  {
-    icon: <FaJsSquare className="text-yellow-500 text-5xl mb-4" />,
     title: "JavaScript",
-    description: "JavaScript is a versatile, high-level programming language used to make web pages interactive and dynamic."
+    description:
+      "Building interactive web applications using modern ES6+ JavaScript.",
   },
   {
-    icon: <FaReact className="text-blue-500 text-5xl mb-4" />,
+    title: "TypeScript",
+    description:
+      "Developing scalable applications with static typing and maintainable code.",
+  },
+  {
     title: "React.js",
-    description: "React.js is a JavaScript library used to build user interfaces. It is component-based and widely used for developing single-page applications."
+    description:
+      "Creating component-based and responsive user interfaces with React.",
   },
   {
-    icon: <FaReact className="text-indigo-600 text-5xl mb-4" />,
-    title: "React Router",
-    description: "React Router is a standard library for routing in React. It allows navigation between views or pages in a React application."
+    title: "Next.js",
+    description:
+      "Building modern full-stack applications with SSR, API routes, and App Router.",
   },
   {
-    icon: <SiFirebase className="text-yellow-500 text-5xl mb-4" />,
-    title: "Firebase",
-    description: "Firebase is a platform for developing mobile and web applications. It offers backend services such as authentication, real-time databases, and hosting."
+    title: "Tailwind CSS",
+    description:
+      "Designing responsive and beautiful user interfaces with utility-first CSS.",
   },
   {
-    icon: <SiExpress className="text-black text-5xl mb-4" />,
-    title: "Express.js",
-    description: "Express.js is a minimal and flexible Node.js web application framework that simplifies backend development with routing and middleware."
+    title: "Redux Toolkit & RTK Query",
+    description:
+      "Managing state and handling API interactions efficiently.",
   },
   {
-    icon: <FaNodeJs className="text-green-500 text-5xl mb-4" />,
-    title: "Node.js",
-    description: "Node.js is a runtime environment that lets developers use JavaScript for server-side programming, providing asynchronous I/O operations."
+    title: "Node.js & Express.js",
+    description:
+      "Developing RESTful APIs and scalable backend applications.",
   },
   {
-    icon: <SiJsonwebtokens className="text-yellow-400 text-5xl mb-4" />,
-    title: "JWT",
-    description: "JWT (JSON Web Tokens) is an open standard for securely transmitting information between parties as a JSON object, often used for authentication."
+    title: "MongoDB",
+    description:
+      "Working with NoSQL databases and designing efficient schemas.",
   },
   {
-    icon: <SiJenkins className="text-yellow-500 text-5xl mb-4" />,
-    title: "Pipeline",
-    description: "Pipeline refers to the process of automating the steps involved in building, testing, and deploying code using tools like Jenkins."
-  }
+    title: "Firebase & JWT",
+    description:
+      "Implementing authentication, authorization, and cloud services.",
+  },
+  {
+    title: "Python",
+    description:
+      "Building automation tools, data processing pipelines, and AI applications.",
+  },
+  {
+    title: "Pandas & NumPy",
+    description:
+      "Data cleaning, preprocessing, and numerical computing for machine learning.",
+  },
+  {
+    title: "Scikit-Learn",
+    description:
+      "Developing machine learning models for classification, regression, and prediction tasks.",
+  },
+  {
+    title: "Machine Learning",
+    description:
+      "Building predictive models using Random Forest, Logistic Regression, and feature engineering.",
+  },
+  {
+    title: "Deep Learning",
+    description:
+      "Exploring neural networks, TensorFlow, Keras, and PyTorch for advanced AI applications.",
+  },
+  {
+    title: "NLP",
+    description:
+      "Working with Natural Language Processing techniques including tokenization, embeddings, and text classification.",
+  },
+  {
+    title: "BiLSTM",
+    description:
+      "Building sequence models for sentiment analysis, text classification, and NLP tasks using Bidirectional LSTM networks.",
+  },
+  {
+    title: "Transformers & LLMs",
+    description:
+      "Exploring BERT, Hugging Face Transformers, embeddings, and large language models.",
+  },
+  {
+    title: "TensorFlow & Keras",
+    description:
+      "Developing deep learning models for computer vision and NLP applications.",
+  },
+  {
+    title: "Three.js",
+    description:
+      "Creating interactive 3D graphics and immersive web experiences.",
+  },
+  {
+    title: "Git & GitHub",
+    description:
+      "Version control, collaboration, and maintaining software development workflows.",
+  },
+  {
+    title: "Docker",
+    description:
+      "Containerizing applications and creating reproducible development environments.",
+  },
+  {
+    title: "REST API",
+    description:
+      "Designing secure and scalable APIs with proper authentication and documentation.",
+  },
 ];
 
 const Technologies = () => {

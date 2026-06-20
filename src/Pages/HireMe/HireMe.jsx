@@ -31,8 +31,8 @@ const HireMe = ({ isOpen, onClose }) => {
           <ul className="mt-4 space-y-3">
             {[
               "Full-Stack Web Development (MERN)",
-              "Frontend Development (React, Tailwind)",
-              "Backend Development (Node.js, Express.js, MongoDB)",
+              "Frontend Development (React, Next.js, Vite, Tailwind)",
+              "Backend Development (Node.js, Express.js, MongoDB, Firebase, PostgreSQL, MySQL)",
               "SEO Optimization for Websites",
               "Custom Web Application Development"
             ].map((service, index) => (
