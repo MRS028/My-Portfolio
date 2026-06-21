@@ -199,17 +199,22 @@ const Hero = () => {
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between relative z-10">
         {/* Text Content */}
         <div className="lg:w-1/2 text-center pt-5 lg:text-left lg:mb-0">
-          <h1 className="text-4xl lg:text-5xl font-bold leading-tight drop-shadow-lg">
+           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-400/25 bg-blue-400/8 text-green-400 text-xs font-bold tracking-widest uppercase mb-5">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse flex-shrink-0" />
+            Available for work
+          </div>
+          <h1 className="text-3xl lg:text-4xl font-bold leading-tight drop-shadow-lg">
             Hi, I'm <br className="" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-blue-400 to-purple-400">
               MD. RIFAT SHEIKH
             </span>
           </h1>
-          <h2 className="text-xl lg:text-3xl font-medium mt-4 text-blue-200 drop-shadow-md">
+          <h2 className="text-xl lg:text-2xl font-medium mt-4 text-blue-200 drop-shadow-md">
             <Typewriter
               words={[
-                "A MERN Stack Developer...",
+                "Software Engineer (MERN)...",
                 "A Problem Solver...",
+                "AI/ML Enthusiast...",
                 "A Tech Enthusiast...",
                 "An Innovator...",
               ]}
@@ -307,6 +312,18 @@ const Hero = () => {
               alt="Profile"
               className="relative rounded-full shadow-2xl w-64 h-64 lg:w-80 lg:h-80 object-cover"
             />
+            <span
+              className="absolute z-10 mx-6 px-3.5 py-1.5 rounded-full text-xs font-medium text-blue-300 border border-blue-400/22 whitespace-nowrap hidden lg:block"
+              style={{ background: "rgba(10,14,30,0.85)", backdropFilter: "blur(8px)", left: "-96px", top: "28px" }}
+            >
+              ⚡ MERN & AI/ML
+            </span>
+            <span
+              className="absolute z-10 px-3.5 py-1.5 mx-6 rounded-full text-xs font-medium text-blue-300 border border-blue-400/22 whitespace-nowrap hidden lg:block"
+              style={{ background: "rgba(10,14,30,0.85)", backdropFilter: "blur(8px)", right: "-90px", bottom: "28px" }}
+            >
+              🚀 Open to work
+            </span>
           </div>
         </div>
       </div>
