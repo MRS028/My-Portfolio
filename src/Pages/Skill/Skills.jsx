@@ -212,7 +212,7 @@ const Skills = () => {
 
   {/* Top Skills */}
   <div className="max-w-6xl mx-auto mb-20">
-    <div className="grid grid-cols-2 md:flex flex-wrap justify-center gap-4">
+    <div className="grid md:mx-0 mx-2  grid-cols-2 md:flex lg:flex flex-wrap justify-center gap-4">
       {marqueeSkills.map((skill, index) => (
         <div
           key={index}
@@ -279,7 +279,7 @@ const Skills = () => {
     p-5 sm:p-6 lg:p-8
     transition-all duration-500
     hover:border-white/20
-    hover:-translate-y-1
+    hover:-translate-y-1 mx-2
   "
 >
   {/* Glow */}
@@ -356,7 +356,7 @@ const Skills = () => {
     subtitle="Technologies I use the most"
   />
 
-  <div className="max-w-7xl mx-auto grid  md:grid-cols-3 lg:grid-cols-4 gap-8">
+  <div className="max-w-7xl mx-2 grid  md:grid-cols-3 lg:grid-cols-4 gap-8">
     {detailedTechnologies.map((tech, index) => (
       <AnimatedSkillCard
         key={index}
