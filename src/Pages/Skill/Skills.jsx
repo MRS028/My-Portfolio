@@ -203,11 +203,11 @@ const Skills = () => {
     const skillsForMarquee = [...marqueeSkills, ...marqueeSkills];
 
     return (
-<div className="relative z-10 px-4 pt-10">
+<div className="relative z-10 md:px-2 pt-10">
 
   <SectionTitle
     title="Skills & Technologies"
-    subtitle="Full Stack Developer • AI/ML Engineer • NLP Enthusiast"
+    subtitle="MERN Stack Developer • AI/ML Engineer • NLP Enthusiast"
   />
 
   {/* Top Skills */}

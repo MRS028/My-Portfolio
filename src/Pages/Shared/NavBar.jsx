@@ -86,7 +86,7 @@ const NavBar = () => {
                   <span className="text-green-400">A</span>T
                 </span>
                 <span className="text-xs text-gray-400 font-medium tracking-wider mt-[-2px]">
-                  MERN Stack Developer
+                  MERN & AI/ML
                 </span>
               </span>
             </Link>

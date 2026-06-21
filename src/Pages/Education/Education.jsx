@@ -88,7 +88,7 @@ const Education = () => {
       <AnimatedBackground />
       <div className="relative z-10 max-w-7xl mx-auto">
         <SectionTitle 
-          title="My Educational Journey" 
+          title="Academic Journey" 
           subtitle="The academic background that shaped my career"
         />
 

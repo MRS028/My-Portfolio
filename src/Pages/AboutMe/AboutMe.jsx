@@ -1,145 +1,337 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AnimatedBackground from "@/Components/AnimatedBackground/AnimatedBackground";
-import { Element } from "react-scroll";
+import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 
-// --- Replicated SectionTitle for self-containment ---
-const SectionTitle = ({ title, subtitle }) => (
-    <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-blue-400 to-purple-400 tracking-tight">{title}</h2>
-        {subtitle && <p className="mt-4 text-lg text-gray-400">{subtitle}</p>}
-        <div className="mt-6 h-1 w-24 bg-gradient-to-r from-green-400 to-blue-500 mx-auto rounded-full"></div>
-    </div>
-);
+// ─── Typing Hook ────────────────────────────────────────────────────────────
+const useTypingAnimation = (lines, speed = 35, pauseAfter = 2200) => {
+  const [display, setDisplay] = useState("");
+  const lineRef = useRef(0);
+  const charRef = useRef(0);
+  const timerRef = useRef(null);
 
-// --- Code Snippet with Typing Animation, Sound, Pause on Hover ---
-const CodeSnippet = () => {
-    const fullCode = [
-        ` const coder = {` ,
-        `  name: 'Md. Rifat Sheikh',`,
-        `  skills: ['React', 'Node.js', 'Express', 'MongoDB', 'RDBMS', 'Next.js', 'JWT'],`,
-        `  hardWorker: true,`,
-        `  quickLearner: true,`,
-        `  problemSolver: true,`,
-        `  hireable: function() {`,
-        `    return (`,
-        `      this.hardWorker && this.problemSolver && this.skills.length >= 5`,
-        `    );`,
-        `  }`,
-        `};`
-    ];
+  const tick = () => {
+    const l = lineRef.current;
+    const c = charRef.current;
 
-    const [typedCode, setTypedCode] = useState("");
-    const [isPaused, setIsPaused] = useState(false);
-    const intervalRef = useRef(null);
+    if (l >= lines.length) {
+      timerRef.current = setTimeout(() => {
+        setDisplay("");
+        lineRef.current = 0;
+        charRef.current = 0;
+        timerRef.current = setTimeout(schedule, 60);
+      }, pauseAfter);
+      return;
+    }
 
-    useEffect(() => {
-    let currentIndex = 0;
-    let currentLine = 0;
+    const line = lines[l];
+    if (c < line.length) {
+      setDisplay((prev) => prev + line[c]);
+      charRef.current = c + 1;
+    } else {
+      setDisplay((prev) => prev + "\n");
+      lineRef.current = l + 1;
+      charRef.current = 0;
+    }
+    schedule();
+  };
 
-    const startTyping = () => {
-        intervalRef.current = setInterval(() => {
-            if (!isPaused) {
-                if (currentLine < fullCode.length) {
-                    const line = fullCode[currentLine];
-                    setTypedCode(prev => prev + line[currentIndex]);
+  const schedule = () => {
+    timerRef.current = setTimeout(tick, speed);
+  };
 
-                    currentIndex++;
+  useEffect(() => {
+    schedule();
+    return () => clearTimeout(timerRef.current);
+  }, []);
 
-                    if (currentIndex === line.length) {
-                        currentIndex = 0;
-                        currentLine++;
-                        setTypedCode(prev => prev + '\n');
-                    }
-                } else {
-                    clearInterval(intervalRef.current);
-                    setTimeout(() => {
-                        setTypedCode("");
-                        currentLine = 0;
-                        currentIndex = 0;
-                        startTyping(); 
-                    }, 2000);
-                }
-            }
-        }, 40); 
-    };
-
-    startTyping();
-
-    return () => clearInterval(intervalRef.current); 
-}, []); 
-
-
-    const highlightSyntax = (line) => {
-        let highlightedLine = line.replace(/const|return|function/g, '<span class="text-pink-400">$&</span>');
-        highlightedLine = highlightedLine.replace(/'[^']*'/g, '<span class="text-yellow-300">$&</span>');
-        highlightedLine = highlightedLine.replace(/true|false/g, '<span class="text-blue-400">$&</span>');
-        highlightedLine = highlightedLine.replace(/coder|name|skills|hardWorker|quickLearner|problemSolver|hireable|this/g, '<span class="text-sky-300">$&</span>');
-        return <span dangerouslySetInnerHTML={{ __html: highlightedLine }} />;
-    };
-
-    return (
-        <div
-            className="group relative bg-gray-800/50 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl
-                w-full max-w-xl mx-auto
-                p-2 sm:p-2
-                text-xs sm:text-sm md:text-base  overflow-hidden
-                "
-            style={{ minWidth: 0 }}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-        >
-            <div className="absolute -inset-px bg-gradient-to-r from-green-700 via-blue-800 to-purple-700 rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-lg"></div>
-            <div className="relative p-0 sm:p-2">
-                <div className="flex items-center pb-3 border-b border-gray-700">
-                    <div className="h-3 w-3 rounded-full bg-red-500 mr-2"></div>
-                    <div className="h-3 w-3 rounded-full bg-yellow-500 mr-2"></div>
-                    <div className="h-3 w-3 rounded-full bg-green-500"></div>
-                </div>
-                <div className="overflow-x-auto md:overflow-x-hidden mt-2 md:mt-1">
-                    <pre className="text-white font-mono text-xs sm:text-sm md:text-base p-0 sm:p-4 whitespace-pre min-w-full">
-                        {typedCode.split('\n').map((line, i) => (
-                            <div key={i} className="flex min-w-max">
-                                <span className="text-gray-500 select-none mr-2 sm:mr-4">{i + 1}</span>
-                                {highlightSyntax(line)}
-                            </div>
-                        ))}
-                        <span className="bg-green-400 h-4 w-0.5 inline-block animate-pulse"></span>
-                    </pre>
-                </div>
-            </div>
-        </div>
-    );
+  return display;
 };
 
-// --- Main AboutMe Component ---
+// ─── Syntax Highlighter ──────────────────────────────────────────────────────
+const highlight = (line) => {
+  const tokens = [];
+  let remaining = line;
+  const rules = [
+    {
+      re: /^(const|let|return|=>|true|false)/,
+      cls: "text-violet-400 font-medium",
+    },
+    { re: /^'[^']*'/, cls: "text-emerald-400" },
+    {
+      re: /^(name|role|stack|aiStack|traits|hire)(?=\s*:|\()/,
+      cls: "text-sky-300",
+    },
+    { re: /^\/\/[^\n]*/, cls: "text-gray-500 italic" },
+    { re: /^\d+/, cls: "text-amber-300" },
+  ];
+
+  let key = 0;
+  while (remaining.length > 0) {
+    let matched = false;
+    for (const { re, cls } of rules) {
+      const m = remaining.match(re);
+      if (m) {
+        tokens.push(
+          <span key={key++} className={cls}>
+            {m[0]}
+          </span>,
+        );
+        remaining = remaining.slice(m[0].length);
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      tokens.push(
+        <span key={key++} className="text-gray-300">
+          {remaining[0]}
+        </span>,
+      );
+      remaining = remaining.slice(1);
+    }
+  }
+  return tokens;
+};
+
+// ─── Code Terminal ───────────────────────────────────────────────────────────
+const Terminal = () => {
+  const lines = [
+    "const developer = {",
+    "  name: 'Md. Rifat Sheikh',",
+    "  role: 'Software Engineer',",
+    "  stack: [",
+    "    'React', 'Next.js', 'TypeScript',",
+    "    'Node.js', 'Express', 'MongoDB',",
+    "  ],",
+    "  aiStack: [",
+    "    'Python', 'TensorFlow', 'NLP',",
+    "    'BiLSTM', 'Transformers',",
+    "  ],",
+    "  traits: {",
+    "    hardWorker: true,",
+    "    quickLearner: true,",
+    "    teamPlayer: true,",
+    "  },",
+    "  hire: () => true, // please do :)",
+    "};",
+  ];
+
+  const text = useTypingAnimation(lines, 34, 2400);
+  const rows = text.split("\n");
+
+  return (
+    <div className="rounded-2xl border border-white/10 bg-[#0d1117] overflow-hidden shadow-xl">
+      {/* Top bar */}
+      <div className="flex items-center gap-2 px-4 py-3 bg-[#161b22] border-b border-white/[0.06]">
+        <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+        <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+        <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+        <span className="ml-3 text-xs text-gray-500 font-mono tracking-wide">
+          developer.ts
+        </span>
+      </div>
+      {/* Code */}
+      <div className="p-5 overflow-x-auto">
+        <pre className="font-mono text-sm leading-6 min-h-[18rem]">
+          {rows.map((row, i) => (
+            <div key={i} className="flex gap-4">
+              <span className="select-none text-gray-600 text-right w-4 shrink-0">
+                {i + 1}
+              </span>
+              <span>{highlight(row)}</span>
+            </div>
+          ))}
+          <span className="inline-block w-[2px] h-4 bg-violet-400 animate-pulse align-middle ml-1" />
+        </pre>
+      </div>
+    </div>
+  );
+};
+
+// ─── Stat Card ───────────────────────────────────────────────────────────────
+const Stat = ({ value, label, accent }) => (
+  <div className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] py-5 px-3 hover:bg-white/[0.05] transition-colors duration-200">
+    <span className={`text-3xl font-bold ${accent}`}>{value}</span>
+    <span className="text-gray-500 text-xs mt-1.5 tracking-wide uppercase">
+      {label}
+    </span>
+  </div>
+);
+
+// ─── Skill Pill ──────────────────────────────────────────────────────────────
+const Pill = ({ label, variant = "default" }) => {
+  const styles = {
+    default: "border-white/10 bg-white/[0.04] text-gray-300",
+    ai: "border-violet-500/25 bg-violet-500/10 text-violet-300",
+  };
+  return (
+    <span
+      className={`px-3 py-1 rounded-lg border text-xs font-medium tracking-wide transition-colors hover:bg-white/[0.08] ${styles[variant]}`}
+    >
+      {label}
+    </span>
+  );
+};
+
+// ─── Timeline Item ────────────────────────────────────────────────────────────
+const TimelineItem = ({ year, title, desc, accent }) => (
+  <div className="flex gap-4">
+    <div className="flex flex-col items-center">
+      <div className={`h-2 w-2 rounded-full mt-1.5 shrink-0 ${accent}`} />
+      <div className="w-px flex-1 bg-white/[0.07] mt-1" />
+    </div>
+    <div className="pb-5">
+      <span className="text-xs text-gray-500 font-mono">{year}</span>
+      <p className="text-sm font-medium text-white mt-0.5">{title}</p>
+      <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{desc}</p>
+    </div>
+  </div>
+);
+
+// ─── Main Component ───────────────────────────────────────────────────────────
 const AboutMe = () => {
-    return (
-        <section id="about" className="relative py-2 overflow-hidden bg-gray-900 text-white">
-            {/* <Element name="about"></Element> */}
-            <AnimatedBackground />
-            <div className="relative z-10 container mx-auto px-6">
-                <SectionTitle title="About Me" subtitle="A passionate developer on a mission to build great things." />
+  const webStack = [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Tailwind CSS",
+    "Firebase",
+    "REST APIs",
+    "JWT",
+  ];
+  const aiStack = [
+    "Python",
+    "TensorFlow",
+    "NLP",
+    "BiLSTM",
+    "Transformers",
+    "LLMs",
+    "scikit-learn",
+  ];
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="bg-gray-800/30 backdrop-blur-sm border border-white/10 p-8 rounded-xl">
-                        <h3 className="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-700 to-blue-400">Who I Am</h3>
-                        <p className="text-lg text-gray-300 leading-relaxed text-justify">
-                            I am MD. Rifat Sheikh, a Junior MERN Stack Developer with a deep interest in creating web applications using <span className="text-cyan-300">React</span>, <span className="text-green-400">Node.js</span>, <span className="text-gray-300">Express</span>, and <span className="text-green-300">MongoDB</span>. I am passionate about writing clean, efficient code that solves real-world problems and enhances the user experience. I'm always eager to learn new technologies and continuously improve my skills.
-                        </p>
-                        <p className="mt-4 text-lg text-gray-300 leading-relaxed text-justify">
-                            Currently, I am expanding my expertise in full-stack development, focusing on building more advanced applications with modern tools and frameworks.
-                        </p>
-                    </div>
+  const timeline = [
+    {
+      year: "2023",
+      title: "Started frontend development",
+      desc: "Built first projects with HTML, CSS, JavaScript and fell in love with the web.",
+      accent: "bg-sky-400",
+    },
+    {
+      year: "2024",
+      title: "Went full-stack with MERN",
+      desc: "Shipped 10+ apps using React, Node.js, Express, and MongoDB.",
+      accent: "bg-emerald-400",
+    },
+    {
+      year: "2025",
+      title: "Expanded into AI & NLP",
+      desc: "Began studying Machine Learning, Deep Learning, Transformers, and BiLSTM models.",
+      accent: "bg-violet-400",
+    },
+    {
+      year: "Now",
+      title: "Building toward AI Engineering",
+      desc: "Merging software engineering skills with LLM development and NLP research.",
+      accent: "bg-amber-400",
+    },
+  ];
 
-                    <div>
-                        <CodeSnippet />
-                    </div>
-                </div>
+  return (
+    <section
+      id="about"
+      className="relative py-24 overflow-hidden bg-gray-950 text-white"
+    >
+      <AnimatedBackground />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        {/* ── Header ── */}
+        <SectionTitle
+          title="About Me"
+          // subtitle="MERN Stack Developer • AI/ML Engineer • NLP Enthusiast"
+        />
+
+        {/* ── Status Badge ── */}
+        <div className="flex justify-center mb-4 md:mb-6">
+          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-emerald-500/20 bg-emerald-500/[0.2]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            </span>
+            <span className="text-emerald-300 text-sm font-medium">
+              Open to Internship & Junior Software Engineer Roles
+            </span>
+          </div>
+        </div>
+
+        {/* ── Main Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          {/* LEFT */}
+          <div className="space-y-8">
+            {/* Bio */}
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 space-y-3 text-[15px] text-gray-300 leading-7">
+              <p>
+                I'm a Computer Science student and Junior MERN Stack Developer
+                who builds modern, performant web apps with clean and scalable
+                architecture. My core stack is{" "}
+                <span className="text-sky-300">React</span>,{" "}
+                <span className="text-sky-300">Next.js</span>,{" "}
+                <span className="text-emerald-400">Node.js</span>,{" "}
+                <span className="text-emerald-400">Express</span>, and{" "}
+                <span className="text-emerald-400">MongoDB</span>.
+              </p>
+              <p>
+                Beyond web dev, I'm actively studying Machine Learning, NLP,
+                BiLSTM, and Transformers — moving toward AI Engineering and LLM
+                development.
+              </p>
             </div>
 
-            {/* <div id="about"></div> */}
-        </section>
-    );
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-3">
+              <Stat value="20+" label="Projects" accent="text-sky-400" />
+              <Stat value="2+" label="Years" accent="text-emerald-400" />
+              <Stat value="30+" label="Skills" accent="text-violet-400" />
+            </div>
+
+            {/* Skills */}
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+              <p className="text-xs text-gray-500 font-mono tracking-widest uppercase mb-5">
+                Journey
+              </p>
+              {timeline.map((t) => (
+                <TimelineItem key={t.year} {...t} />
+              ))}
+            </div>
+            {/* <div className="space-y-4">
+                            <div>
+                                <p className="text-xs text-gray-500 font-mono tracking-widest uppercase mb-3">Web Stack</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {webStack.map(s => <Pill key={s} label={s} />)}
+                                </div>
+                            </div>
+                            <div>
+                                <p className="text-xs text-gray-500 font-mono tracking-widest uppercase mb-3">AI / ML Stack</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {aiStack.map(s => <Pill key={s} label={s} variant="ai" />)}
+                                </div>
+                            </div>
+                        </div> */}
+          </div>
+
+          {/* RIGHT */}
+          <div className="space-y-8">
+            {/* Terminal */}
+            <Terminal />
+
+            {/* Timeline */}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default AboutMe;
